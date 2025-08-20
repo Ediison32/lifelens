@@ -1,0 +1,70 @@
+div#contenedor {
+    display: flex;
+    flex-direction: row;
+}
+div#contenedor > div {
+    width: 250px;
+    height: 300px;
+    border: 1px solid #0000a0;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+div#c {
+    background-color: #aaaaaa;
+}
+
+div#torre_1 {
+    width: 60px;
+    height: 25px;
+    background-color: #26daff
+}
+
+div#torre_2 {
+    width: 75px;
+    height: 25px;
+    background-color: #555555
+}
+
+div#torre_3 {
+    width: 90px;
+    height: 25px;
+    background-color: #ff8c11
+}
+
+div#torre_4 {
+    width: 110px;
+    height: 25px;
+    background-color: #00d41e
+}
+
+div#torre_5 {
+    width: 140px;
+    height: 25px;
+    background-color: #1b7cb8
+}
+
+div#torre_6 {
+    width: 170px;
+    height: 25px;
+    background-color: #ed252b
+}
+
+div#torre_7 {
+    width: 200px;
+    height: 25px;
+    background-color: #693291
+}
+
+.boxes{
+    border-radius: 12px;
+    margin: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
