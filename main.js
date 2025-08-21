@@ -1,6 +1,7 @@
 var objetos = {
     "a": ["torre_1", "torre_2", "torre_3", "torre_4","torre_5","torre_6","torre_7"]
 }
+0.
 var torresTotales = 7;
 var contador = 0;
 // Funcion iniciadora
@@ -64,7 +65,7 @@ function dropFinal(e) {
     // Comparar la posicion de las piezas
     var puedoPoner = cortaCompa(padre, item);
 
-    if(puntero.id != "torre_1" && puntero.id != "torre_2" && puntero.id != "torre_3" && item != '' &&  puedoPoner) {
+    if(puntero.id != "torre_1" && puntero.id != "torre_2" && puntero.id != "torre_3" && puntero.id != "torre_4" && puntero.id != "torre_5" && puntero.id != "torre_6" && puntero.id != "torre_7"  && item != '' &&  puedoPoner) {
         
         var quitar = document.getElementById(item);
         quitar.parentNode.removeChild(quitar);
