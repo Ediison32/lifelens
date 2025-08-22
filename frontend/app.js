@@ -86,17 +86,22 @@ function showInstructions() {
     }
     const task = tasks[currentTask];
     taskTitle.textContent = task.name;
+    taskTitle.classList.remove('hidden'); 
     instructions.textContent = task.instructions;
+    instructions.classList.remove('hidden');
     taskCounter.textContent = `Tarea ${currentTask + 1} de ${tasks.length}`;
     startTaskBtn.classList.remove('hidden');
     timerDiv.classList.add('hidden');
     stimulusDiv.textContent = "";
+    stimulusDiv.classList.add('hidden'); 
     optionsDiv.innerHTML = "";
 }
 
 // Botón para comenzar tarea
 startTaskBtn.addEventListener('click', () => {
     startTaskBtn.classList.add('hidden');
+    instructions.classList.add('hidden');// OCULTA LA DESCRIPCIÓN
+    taskTitle.classList.add('hidden');// oculta el numero de la tarea 
     timerDiv.classList.remove('hidden');
     loadTask();
 });
@@ -135,6 +140,8 @@ function nextTrial() {
     }
     optionsDiv.innerHTML = "";
     let correctAnswer = "";
+
+    stimulusDiv.classList.remove('hidden'); 
 
     if (tasks[currentTask].type === "word") {
         correctAnswer = respuestas.tarea1[currentTrial];
