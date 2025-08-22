@@ -1,0 +1,1 @@
+// aqui solo se incan las funciones de otros js 
