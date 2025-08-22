@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trail Making Test Interactivo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Trail Making Test (Parte A)</h1>
+    <div class="controls">
+        <button id="reset-button">Iniciar / Reiniciar</button>
+        <div class="info">Tiempo: <span id="timer">0s</span></div>
+        <div class="info">Errores: <span id="error-count">0</span></div>
+    </div>
+
+    <div id="test-container">
+        <canvas id="canvas"></canvas>
+        <!-- Los círculos con los números se generarán aquí con JavaScript -->
+    </div>
+
+    <div id="results" class="hidden">
+        <h2>¡Test Completado!</h2>
+        <p>Tiempo final: <span id="final-time"></span></p>
+        <p>Total de errores: <span id="final-errors"></span></p>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
