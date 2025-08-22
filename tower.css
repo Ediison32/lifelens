@@ -1,8 +1,18 @@
-div#contenedor {
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
+}
+
+div#container {
     display: flex;
     flex-direction: row;
 }
-div#contenedor > div {
+
+div#container > div {
     width: 250px;
     height: 300px;
     border: 1px solid #0000a0;
@@ -13,58 +23,57 @@ div#contenedor > div {
     align-items: center;
 }
 
-
 div#c {
     background-color: #aaaaaa;
 }
 
-div#torre_1 {
+/* Disk styles */
+div#disk_1 {
     width: 60px;
     height: 25px;
-    background-color: #26daff
+    background-color: #26daff;
 }
 
-div#torre_2 {
+div#disk_2 {
     width: 75px;
     height: 25px;
-    background-color: #555555
+    background-color: #555555;
 }
 
-div#torre_3 {
+div#disk_3 {
     width: 90px;
     height: 25px;
-    background-color: #ff8c11
+    background-color: #ff8c11;
 }
 
-div#torre_4 {
+div#disk_4 {
     width: 110px;
     height: 25px;
-    background-color: #00d41e
+    background-color: #00d41e;
 }
 
-div#torre_5 {
+div#disk_5 {
     width: 140px;
     height: 25px;
-    background-color: #1b7cb8
+    background-color: #1b7cb8;
 }
 
-div#torre_6 {
+div#disk_6 {
     width: 170px;
     height: 25px;
-    background-color: #ed252b
+    background-color: #ed252b;
 }
 
-div#torre_7 {
+div#disk_7 {
     width: 200px;
     height: 25px;
-    background-color: #693291
+    background-color: #693291;
 }
 
-.boxes{
+.disk {
     border-radius: 12px;
     margin: 1px;
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
