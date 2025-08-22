@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juego Go/No-Go</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styleGono.css"><!-- opcional, por si quieres retoques -->
+</head>
+
+<body class="bg-light text-center">
+ <body>
+
+  <main class="container py-4">
+    <h1>Juego Go/No-Go</h1>
+    <div id="instructions" class="mb-3 text-secondary fs-5"></div>
+
+    <!-- Pantalla de introducción -->
+    <div id="stage-intro" class="d-none">
+      <h2 id="stage-title"></h2>
+      <p id="stage-instructions"></p>
+      <p id="stage-progress"></p>
+      <button id="begin-stage" class="btn btn-custom">Comenzar Etapa</button>
+    </div>
+
+    <!-- Contador -->
+    <div class="d-flex justify-content-between px-4">
+      <span>Aciertos: <span id="correct-count">0</span></span>
+      <span>Errores: <span id="error-count">0</span></span>
+    </div>
+
+    <!-- Estímulo -->
+    <div id="stimulus"></div>
+
+    <!-- Resultados -->
+    <div id="results" class="mt-3"></div>
+
+    <!-- Botones -->
+    <div class="mt-4">
+      <button id="start" class="btn btn-custom">Iniciar</button>
+
+      <!-- Sección Palabras -->
+      <div id="section-si-no-otro" class="d-none d-flex justify-content-center gap-3 mt-3">
+        <button id="si" class="btn btn-custom">SÍ</button>
+        <button id="no" class="btn btn-custom">NO</button>
+        <button id="otro" class="btn btn-custom">OTRO</button>
+      </div>
+
+      <!-- Sección Colores -->
+      <div id="section-colores" class="d-none d-flex justify-content-center gap-3 mt-3">
+        <button id="rojo" class="btn btn-custom">Rojo</button>
+        <button id="azul" class="btn btn-custom">Azul</button>
+        <button id="otro-color" class="btn btn-custom">Otro</button>
+      </div>
+
+      <!-- Sección Signos -->
+      <div id="section-signals" class="d-none d-flex justify-content-center gap-3 mt-3">
+        <button id="xl" class="btn btn-custom">&gt;</button>
+        <button id="l" class="btn btn-custom">/</button>
+        <button id="xx" class="btn btn-custom">x</button>
+        <button id="otro-signo" class="btn btn-custom">Otro</button>
+      </div>
+
+      <!-- Botón siguiente etapa -->
+      <button id="next-stage" class="btn btn-custom d-none mt-3">Siguiente Etapa</button>
+    </div>
+  </main>
+
+  <script src="go-no-go.js"></script>
+</body>
+</html>

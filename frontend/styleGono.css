@@ -1,0 +1,35 @@
+ body {
+      background-color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      color: #8b5cf6; /* morado */
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    #stimulus {
+      border: 2px solid #8b5cf6;
+      border-radius: 20px;
+      width: 80%;
+      height: 200px;
+      margin: 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+    .btn-custom {
+      border: 2px solid #8b5cf6;
+      color: black;
+      border-radius: 50px;
+      padding: 10px 30px;
+      background: white;
+    }
+    .btn-custom:hover {
+      background: #8b5cf6;
+      color: white;
+    }
+    .hidden {
+      display: none !important;
+    }
