@@ -9,40 +9,25 @@ const colorCodes = {
 // TODAS LAS RESPUESTAS (100 elementos por tarea)
 const respuestas = {
     tarea1: [
-        "ROJO","AZUL","VERDE","ROJO","AZUL","VERDE","VERDE","ROJO","AZUL","VERDE",
-        "AZUL","ROJO","AZUL","VERDE","ROJO","VERDE","AZUL","ROJO","ROJO","AZUL",
-        "ROJO","ROJO","VERDE","AZUL","VERDE","AZUL","VERDE","AZUL","VERDE","ROJO",
-        "ROJO","AZUL","VERDE","AZUL","VERDE","AZUL","VERDE","ROJO","VERDE","ROJO",
-        "VERDE","ROJO","AZUL","ROJO","AZUL","AZUL","VERDE","VERDE","AZUL","VERDE",
-        "VERDE","ROJO","AZUL","ROJO","ROJO","ROJO","AZUL","ROJO","VERDE","AZUL",
-        "VERDE","ROJO","AZUL","ROJO","VERDE","AZUL","AZUL","ROJO","VERDE","ROJO",
-        "ROJO","VERDE","VERDE","AZUL","AZUL","AZUL","AZUL","ROJO","VERDE","ROJO",
-        "ROJO","VERDE","AZUL","ROJO","VERDE","VERDE","ROJO","VERDE","AZUL","AZUL",
-        "ROJO","AZUL","ROJO","VERDE","ROJO","VERDE","ROJO","VERDE","AZUL","VERDE"
+        "ROJO","VERDE","AZUL","VERDE","ROJO","AZUL","ROJO","AZUL","VERDE","AZUL","VERDE","ROJO","VERDE","AZUL","ROJO","AZUL","ROJO","VERDE","ROJO","VERDE",
+        "AZUL","VERDE","ROJO","AZUL","ROJO","VERDE","AZUL","VERDE","ROJO","AZUL","ROJO","AZUL","VERDE","AZUL","VERDE","ROJO","AZUL","ROJO",
+        "VERDE","ROJO","AZUL","ROJO","VERDE","AZUL","VERDE","ROJO","AZUL","VERDE","AZUL","ROJO","AZUL","ROJO","VERDE","ROJO","AZUL","VERDE","ROJO","VERDE",
+        "ROJO","AZUL","VERDE","ROJO","AZUL","VERDE","AZUL","VERDE","ROJO","AZUL","ROJO","VERDE","ROJO","VERDE","AZUL","VERDE","ROJO","AZUL","VERDE","AZUL",
+        "AZUL","VERDE","ROJO","AZUL","VERDE","ROJO","VERDE","ROJO","AZUL","VERDE","ROJO","AZUL","VERDE","ROJO","AZUL","ROJO","VERDE","AZUL","ROJO","VERDE"
     ],
     tarea2: [
-        "AZUL","ROJO","AZUL","VERDE","ROJO","ROJO","AZUL","VERDE","ROJO","AZUL",
-        "VERDE","VERDE","ROJO","AZUL","VERDE","AZUL","ROJO","AZUL","VERDE","ROJO",
-        "VERDE","VERDE","ROJO","ROJO","AZUL","ROJO","AZUL","VERDE","AZUL","VERDE",
-        "VERDE","VERDE","ROJO","VERDE","ROJO","ROJO","ROJO","AZUL","ROJO","AZUL",
-        "AZUL","AZUL","VERDE","AZUL","VERDE","ROJO","ROJO","ROJO","VERDE","AZUL",
-        "AZUL","AZUL","VERDE","AZUL","VERDE","VERDE","VERDE","AZUL","ROJO","ROJO",
-        "ROJO","AZUL","ROJO","AZUL","AZUL","VERDE","VERDE","VERDE","ROJO","VERDE",
-        "AZUL","ROJO","AZUL","VERDE","ROJO","VERDE","VERDE","VERDE","AZUL","AZUL",
-        "AZUL","ROJO","ROJO","VERDE","ROJO","ROJO","AZUL","AZUL","ROJO","VERDE",
-        "VERDE","ROJO","VERDE","AZUL","AZUL","AZUL","VERDE","AZUL","ROJO","ROJO"
+        "AZUL","ROJO","VERDE","AZUL","VERDE","ROJO","VERDE","ROJO","AZUL","ROJO","AZUL","VERDE","ROJO","VERDE","AZUL","VERDE","AZUL","ROJO","VERDE","AZUL",
+        "ROJO","AZUL","VERDE","ROJO","VERDE","AZUL","VERDE","ROJO","AZUL","ROJO","AZUL","VERDE","AZUL","VERDE","ROJO","VERDE","ROJO","AZUL","ROJO","VERDE",
+        "AZUL","VERDE","ROJO","AZUL","ROJO","VERDE","ROJO","AZUL","VERDE","ROJO","VERDE","AZUL","ROJO","VERDE","AZUL","VERDE","ROJO","AZUL","VERDE","AZUL",
+        "VERDE","ROJO","AZUL","VERDE","ROJO","AZUL","VERDE","ROJO","AZUL","VERDE","AZUL","ROJO","AZUL","ROJO","VERDE","AZUL","VERDE","ROJO","AZUL","ROJO",
+        "ROJO","AZUL","VERDE","ROJO","AZUL","VERDE","ROJO","AZUL","VERDE","AZUL","VERDE","ROJO","AZUL","VERDE","ROJO","AZUL","ROJO","VERDE","AZUL","ROJO"
     ],
     tarea3: [
-        "AZUL","ROJO","AZUL","VERDE","ROJO","ROJO","AZUL","VERDE","ROJO","AZUL",
-        "VERDE","VERDE","ROJO","AZUL","VERDE","AZUL","ROJO","AZUL","VERDE","ROJO",
-        "VERDE","VERDE","ROJO","ROJO","AZUL","ROJO","AZUL","VERDE","AZUL","VERDE",
-        "VERDE","VERDE","ROJO","VERDE","ROJO","ROJO","ROJO","AZUL","ROJO","AZUL",
-        "AZUL","AZUL","VERDE","AZUL","VERDE","ROJO","ROJO","ROJO","VERDE","AZUL",
-        "AZUL","AZUL","VERDE","AZUL","VERDE","VERDE","VERDE","AZUL","ROJO","ROJO",
-        "ROJO","AZUL","ROJO","AZUL","AZUL","VERDE","VERDE","VERDE","ROJO","VERDE",
-        "AZUL","ROJO","AZUL","VERDE","ROJO","VERDE","VERDE","VERDE","AZUL","AZUL",
-        "AZUL","ROJO","ROJO","VERDE","ROJO","ROJO","AZUL","AZUL","ROJO","VERDE",
-        "VERDE","ROJO","VERDE","AZUL","AZUL","AZUL","VERDE","AZUL","ROJO","ROJO"
+        "AZUL","ROJO","VERDE","AZUL","VERDE","ROJO","VERDE","ROJO","AZUL","ROJO","AZUL","VERDE","ROJO","VERDE","AZUL","VERDE","AZUL","ROJO","VERDE","AZUL",
+        "ROJO","AZUL","VERDE","ROJO","VERDE","AZUL","VERDE","ROJO","AZUL","ROJO","AZUL","VERDE","AZUL","VERDE","ROJO","VERDE","ROJO","AZUL","ROJO","VERDE",
+        "AZUL","VERDE","ROJO","AZUL","ROJO","VERDE","ROJO","AZUL","VERDE","ROJO","VERDE","AZUL","ROJO","VERDE","AZUL","VERDE","ROJO","AZUL","VERDE","AZUL",
+        "VERDE","ROJO","AZUL","VERDE","ROJO","AZUL","VERDE","ROJO","AZUL","VERDE","AZUL","ROJO","AZUL","ROJO","VERDE","AZUL","VERDE","ROJO","AZUL","ROJO",
+        "ROJO","AZUL","VERDE","ROJO","AZUL","VERDE","ROJO","AZUL","VERDE","AZUL","VERDE","ROJO","AZUL","VERDE","ROJO","AZUL","ROJO","VERDE","AZUL","ROJO"
     ]
 };
 
@@ -58,6 +43,24 @@ let score = 0;
 let timer;
 let timeLeft = 45;
 let scoresPorTarea = [0, 0, 0];
+
+// Variables para almacenar los resultados de cada tarea
+let p = 0;   // Tarea 1
+let c = 0;   // Tarea 2
+let pc = 0;  // Tarea 3
+
+// Variable para almacenar el resultado de la ecuación P_C
+let P_C = 0;
+
+// variable que se encarga de calcular la interferencia 
+let interference = 0;
+
+// Variables para almacenar el tiempo de cada tarea
+let time_homework_p = 0;
+let time_homework_c = 0;
+let time_homework_pc = 0;
+
+let time = 0; // Variable para almacenar el tiempo total en segundos
 
 // DOM
 const startBtn = document.getElementById('start-btn');
@@ -100,20 +103,23 @@ function showInstructions() {
 // Botón para comenzar tarea
 startTaskBtn.addEventListener('click', () => {
     startTaskBtn.classList.add('hidden');
-    instructions.classList.add('hidden');// OCULTA LA DESCRIPCIÓN
-    taskTitle.classList.add('hidden');// oculta el numero de la tarea 
-    timerDiv.classList.remove('hidden');
+    instructions.classList.add('hidden'); // oculta el enunciado
+    taskTitle.classList.add('hidden');    // oculta el título de la tarea
+    taskCounter.classList.add('hidden');  // oculta el contador
+    timerDiv.classList.add('hidden');     // oculta el tiempo
     loadTask();
 });
 
-// Cronómetro
+// Cronómetro (ya no se muestra en pantalla, pero sigue contando internamente)
 function startTimer() {
     timeLeft = 45;
-    timerDiv.textContent = `Tiempo: ${timeLeft}s`;
     timer = setInterval(() => {
         timeLeft--;
-        timerDiv.textContent = `Tiempo: ${timeLeft}s`;
         if (timeLeft <= 0) {
+            if (currentTask === 0) time_homework_p = 45;
+            if (currentTask === 1) time_homework_c = 45;
+            if (currentTask === 2) time_homework_pc = 45;
+            time += 45;
             clearInterval(timer);
             nextTask();
         }
@@ -135,6 +141,10 @@ function loadTask() {
 function nextTrial() {
     let totalTrials = respuestas.tarea1.length; // 100
     if (currentTrial >= totalTrials) {
+        // Al terminar la tarea, guarda el resultado en la variable correspondiente
+        if (currentTask === 0) p = scoresPorTarea[0];
+        if (currentTask === 1) c = scoresPorTarea[1];
+        if (currentTask === 2) pc = scoresPorTarea[2];
         nextTask();
         return;
     }
@@ -179,23 +189,65 @@ function nextTrial() {
 // Siguiente tarea
 function nextTask() {
     clearInterval(timer);
+    // Guarda el tiempo usado en esta tarea (45 - timeLeft)
+    let usedTime = 45 - timeLeft;
+    if (currentTask === 0) time_homework_p = usedTime;
+    if (currentTask === 1) time_homework_c = usedTime;
+    if (currentTask === 2) time_homework_pc = usedTime;
+    time += usedTime;
     currentTask++;
     showInstructions();
 }
 
 // Resultado final
+// Variable para almacenar el resultado de la ecuación total_stroop
+let total_stroop = 0;
+
+// Función para clasificar el resultado de total_stroop
+function climb(total_stroop) {
+    if (total_stroop <= 0.29) {
+        return "muy bajo";
+    } else if (total_stroop <= 0.6) {
+        return "bajo";
+    } else if (total_stroop <= 0.9) {
+        return "medio";
+    } else {
+        return "alto";
+    }
+}
+
 function showResult() {
     testDiv.classList.add('hidden');
     resultDiv.classList.remove('hidden');
 
+    // Asigna los resultados finales a las variables por si acaso
+    p = scoresPorTarea[0];
+    c = scoresPorTarea[1];
+    pc = scoresPorTarea[2];
+
+    // Calcula P_C solo si P + C no es 0 para evitar división por cero
+    if ((p + c) !== 0) {
+        P_C = (p * c) / (p + c);
+    } else {
+        P_C = 0;
+    }
+
+    // calcular la interferencia
+    interference = pc - P_C;
+
+    // Calcula total_stroop solo si time no es 0 para evitar división por cero
+    if (time !== 0) {
+        total_stroop = (p + c + pc) / time;
+    } else {
+        total_stroop = 0;
+    }
+
+    // Clasificación usando climb
+    const climbResult = climb(total_stroop);
+
+    // Solo muestra "test completado"
     let detalle = `
-        <h2>Resultados</h2>
-        <p>Total: ${score} aciertos</p>
-        <ul>
-            <li>Tarea 1: ${scoresPorTarea[0]} aciertos de ${respuestas.tarea1.length}</li>
-            <li>Tarea 2: ${scoresPorTarea[1]} aciertos de ${respuestas.tarea2.length}</li>
-            <li>Tarea 3: ${scoresPorTarea[2]} aciertos de ${respuestas.tarea3.length}</li>
-        </ul>
+        <h2>test completado</h2>
         <button onclick="location.reload()">Reiniciar Test</button>
     `;
     resultDiv.innerHTML = detalle;
