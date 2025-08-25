@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Stroop</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Test de Stroop</h1>
+    <div id="container">
+        <button id="start-btn">Iniciar Test</button>
+
+        <div id="test" class="hidden">
+            <h2 id="task-title"></h2>
+            <p id="instructions"></p>
+            <button id="start-task-btn" class="hidden">Comenzar Tarea</button>
+            <div class="stimulus hidden" id="stimulus"></div>
+            <div class="options hidden" id="options"></div>
+        </div>
+
+        <div id="result" class="hidden"></div>
+    </div>
+
+<script src="app.js"></script>
+</body>
+</html>
