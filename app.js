@@ -6,7 +6,7 @@ const colorCodes = {
     AMARILLO: "orange"
 };
 
-// 100 respuestas del PDF (orden de celdas)
+// Respuestas correctas según el PDF (100 ítems cada uno)
 const respuestas = {
     tarea1: [
         "ROJO","AZUL","VERDE","ROJO","AZUL","VERDE","VERDE","ROJO","AZUL","VERDE",
@@ -46,16 +46,25 @@ const respuestas = {
     ]
 };
 
+// Configuración
 const tasks = [
     { name: "Tarea 1", instructions: "Selecciona la palabra correcta (ignora el color).", type: "word" },
     { name: "Tarea 2", instructions: "Selecciona el color de las XXXX.", type: "colorXXXX" },
-    { name: "Tarea 3", instructions: "Selecciona el color con que está escrita la palabra (palabra aleatoria distinta del color).", type: "colorWord" }
+    { name: "Tarea 3", instructions: "Selecciona el color con que está escrita la palabra.", type: "colorWord" }
 ];
 
 let currentTask = 0;
 let currentTrial = 0;
 let timer;
 let timeLeft = 45;
+let startTime;
+
+// Resultados
+let resultados = {
+    tarea1: [],
+    tarea2: [],
+    tarea3: []
+};
 
 // DOM
 const startBtn = document.getElementById('start-btn');
@@ -86,8 +95,6 @@ function showInstructions() {
     startTaskBtn.classList.remove('hidden');
     stimulusDiv.classList.add('hidden');
     optionsDiv.classList.add('hidden');
-    stimulusDiv.textContent = "";
-    optionsDiv.innerHTML = "";
 }
 
 // Botón para comenzar tarea
@@ -128,16 +135,22 @@ function nextTrial() {
     }
     optionsDiv.innerHTML = "";
     let correctAnswer = "";
+    let estimuloMostrado = "";
+    let colorMostrado = "";
 
     if (tasks[currentTask].type === "word") {
         correctAnswer = respuestas.tarea1[currentTrial];
-        stimulusDiv.textContent = correctAnswer;
+        estimuloMostrado = correctAnswer;
+        stimulusDiv.textContent = estimuloMostrado;
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
         stimulusDiv.style.color = colorCodes[randomColor];
+        colorMostrado = colorCodes[randomColor];
     } else if (tasks[currentTask].type === "colorXXXX") {
         correctAnswer = respuestas.tarea2[currentTrial];
         stimulusDiv.textContent = "XXXX";
         stimulusDiv.style.color = colorCodes[correctAnswer];
+        estimuloMostrado = "XXXX";
+        colorMostrado = colorCodes[correctAnswer];
     } else if (tasks[currentTask].type === "colorWord") {
         correctAnswer = respuestas.tarea3[currentTrial];
         let randomWord;
@@ -146,12 +159,24 @@ function nextTrial() {
         } while (randomWord === correctAnswer);
         stimulusDiv.textContent = randomWord;
         stimulusDiv.style.color = colorCodes[correctAnswer];
+        estimuloMostrado = randomWord;
+        colorMostrado = colorCodes[correctAnswer];
     }
+
+    startTime = Date.now();
 
     colors.forEach(color => {
         const btn = document.createElement('button');
         btn.textContent = color;
         btn.onclick = () => {
+            let tiempoRespuesta = (Date.now() - startTime) / 1000;
+            resultados[`tarea${currentTask + 1}`].push({
+                estimulo: estimuloMostrado,
+                colorMostrado: colorMostrado,
+                respuestaCorrecta: correctAnswer,
+                respuestaUsuario: color,
+                tiempoRespuesta: tiempoRespuesta
+            });
             currentTrial++;
             nextTrial();
         };
@@ -175,5 +200,22 @@ function nextTask() {
 function showThanks() {
     testDiv.classList.add('hidden');
     resultDiv.classList.remove('hidden');
-    resultDiv.textContent = "¡Siguiente Prueba!";
+    resultDiv.textContent = "¡Gracias por participar!";
+    exportarResultados();
+}
+
+// Exportar resultados a CSV
+function exportarResultados() {
+    let csv = "Tarea,Estimulo,ColorMostrado,RespuestaCorrecta,RespuestaUsuario,TiempoRespuesta\n";
+    for (let tarea in resultados) {
+        resultados[tarea].forEach(r => {
+            csv += `${tarea},${r.estimulo},${r.colorMostrado},${r.respuestaCorrecta},${r.respuestaUsuario},${r.tiempoRespuesta}\n`;
+        });
+    }
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "resultados_stroop.csv";
+    a.click();
 }
