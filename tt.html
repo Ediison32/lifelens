@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trail Making Test Interactivo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="main-title">Trail Making Test</h1>
+    <div class="controls">
+        <button id="reset-button">Iniciar Prueba</button>
+        <div class="info">Tiempo: <span id="timer">0s</span></div>
+        <div class="info">Errores: <span id="error-counter">0</span></div>
+        <div class="info">Aciertos: <span id="hit-counter">0</span></div>
+    </div>
+
+    <div id="test-container">
+        <canvas id="canvas"></canvas>
+        <!-- Los círculos con los números se generarán aquí con JavaScript -->
+    </div>
+
+    <div id="results" class="hidden">
+        <div id="part-a-results" class="hidden">
+            <h2>Parte A Completada</h2>
+            <p>Tiempo: <span id="final-time-a"></span></p>
+            <p>Errores: <span id="final-errors-a"></span></p>
+            <p>Puntaje: <span id="final-score-a"></span></p>
+        </div>
+        <div id="part-b-results" class="hidden">
+            <hr>
+            <h2>Parte B Completada</h2>
+            <p>Tiempo: <span id="final-time-b"></span></p>
+            <p>Errores: <span id="final-errors-b"></span></p>
+            <p>Puntaje: <span id="final-score-b"></span></p>
+        </div>
+        <div id="total-results" class="hidden">
+            <hr>
+            <h2>Resultados Totales</h2>
+            <p>Total Aciertos: <span id="total-hits"></span></p>
+            <p>Puntaje Total TMT: <span id="total-score"></span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
