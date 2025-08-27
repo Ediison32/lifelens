@@ -1,7 +1,10 @@
+// --- TRAIL MAKING TEST ---//
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- DOM ELEMENTS ---
     const mainTitle = document.getElementById('main-title');
     const testContainer = document.getElementById('test-container');
+    const instructionsDiv = document.getElementById('instructions');
     const resetButton = document.getElementById('reset-button');
     const timerDisplay = document.getElementById('timer');
     const errorCounterDisplay = document.getElementById('error-counter');
@@ -70,26 +73,26 @@ document.addEventListener('DOMContentLoaded', () => {
             { value: 'A', pos: [62, 68] },
             { value: '2', pos: [39, 77] },
             { value: 'B', pos: [37, 36] },
-            { value: '3', pos: [50, 42] },
+            { value: '3', pos: [50, 36] },
             { value: 'C', pos: [65, 58] },
             { value: '4', pos: [46, 27] },
             { value: 'D', pos: [72, 22] },
             { value: '5', pos: [76, 53] },
             { value: 'E', pos: [74, 80] },
             { value: '6', pos: [47, 74] },
-            { value: 'F', pos: [31, 85] },
-            { value: '7', pos: [43, 62] },
+            { value: 'F', pos: [25, 85] },
+            { value: '7', pos: [43, 42] },
             { value: 'G', pos: [34, 68] },
-            { value: '8', pos: [19, 25] },
-            { value: 'H', pos: [25, 58] },
+            { value: '8', pos: [19, 20] },
+            { value: 'H', pos: [25, 50] },
             { value: '9', pos: [28, 25] },
             { value: 'I', pos: [55, 25] },
             { value: '10', pos: [86, 20] },
             { value: 'J', pos: [76, 68] },
             { value: '11', pos: [85, 90] },
             { value: 'K', pos: [18, 92] },
-            { value: '12', pos: [25, 72] },
-            { value: 'L', pos: [30, 78] },
+            { value: '12', pos: [15, 72] },
+            { value: 'L', pos: [20, 78] },
             { value: '13', pos: [10, 10] }
         ]
     };
@@ -376,6 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const action = resetButton.textContent;
         switch (action) {
             case 'Iniciar Prueba':
+                instructionsDiv.classList.add('hidden');
                 state.gameActive = true;
                 startTimer();
                 resetButton.textContent = 'Terminar Parte A';
@@ -392,6 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case 'Reiniciar Test':
                 initializeTest('A');
+                instructionsDiv.classList.remove('hidden');
                 resetButton.textContent = 'Iniciar Prueba';
                 break;
         }

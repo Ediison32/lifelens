@@ -1,27 +1,31 @@
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f0f0;
-    color: #333;
+    background: linear-gradient(135deg, #f0eef1, #ffffff);
+    color: #000000;
     margin: 0;
     padding: 20px;
     height: 100dvh;
 }
 
 h1 {
-    color: #1a1a1a;
+    color: #0c0b0b;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
 }
 
 #test-container {
     position: relative;
-    /* IMPORTANTE: Ajusta el width y height para que coincida con las proporciones de tu imagen */
     width: 850px;
     height: 910px;
-    border: 2px solid #ccc;
+    border: 3px solid #8E44AD;
+    border-radius: 12px;
     margin-top: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    background: #fff;
 } 
 
 #canvas {
@@ -31,39 +35,46 @@ h1 {
     width: 100%;
     height: 100%;
     background: #fff;
-    z-index: 1; /* El canvas estará debajo de los círculos */
+    z-index: 1;
+    border-radius: 12px;
 }
 
 .circle {
     position: absolute;
-    width: 30px;
-    height: 30px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 2px solid #333;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #6A0DAD;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 18px;
     font-weight: bold;
+    color: #6A0DAD;
     cursor: pointer;
-    z-index: 2; /* Los círculos estarán encima del canvas */
+    z-index: 2;
     user-select: none;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .circle:hover {
-    background-color: rgba(255, 255, 0, 0.7); /* Amarillo al pasar el ratón */
+    background-color: #8E44AD;
+    color: #fff;
+    transform: scale(1.1);
 }
 
 .circle.correct {
-    background-color: rgba(144, 238, 144, 0.9); /* Verde claro */
+    background-color: rgba(144, 238, 144, 0.9);
     border-color: green;
+    color: green;
 }
 
 .circle.error {
-    background-color: rgba(255, 105, 97, 0.9); /* Rojo claro */
+    background-color: rgba(255, 105, 97, 0.9);
     animation: shake 0.3s;
+    color: #fff;
+    border-color: darkred;
 }
 
 @keyframes shake {
@@ -72,15 +83,29 @@ h1 {
     75% { transform: translateX(5px); }
 }
 
+.instructions {
+    width: 80%;
+    max-width: 850px;
+    margin-top: 15px;
+    padding: 15px;
+    background: #fff;
+    border: 2px solid #8E44AD;
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    line-height: 1.5;
+    color: #333;
+}
+
 .controls {
     display: flex;
     gap: 20px;
     align-items: center;
     margin-top: 10px;
-    padding: 10px;
+    padding: 12px;
     background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 #reset-button {
@@ -88,22 +113,33 @@ h1 {
     font-size: 16px;
     cursor: pointer;
     border: none;
-    background-color: #007bff;
+    background-color: #6A0DAD;
     color: white;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#reset-button:hover {
+    background-color: #8E44AD;
+    transform: scale(1.05);
 }
 
 .info {
     font-size: 18px;
+    display: none;
 }
 
 #results {
     margin-top: 20px;
     padding: 20px;
-    border: 2px solid green;
-    background-color: #f0fff0;
+    border: 3px solid #6A0DAD;
+    background-color: #fdf6ff;
     text-align: center;
-    border-radius: 8px;
+    border-radius: 12px;
+    color: #a413b8;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .results-section hr {
