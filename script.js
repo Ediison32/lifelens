@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
+    
+
     // Results divs
     const resultsDiv = document.getElementById('results');
     const partAResultsDiv = document.getElementById('part-a-results');
