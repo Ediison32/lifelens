@@ -76,9 +76,11 @@ const taskCounter = document.getElementById('task-counter');
 
 // Iniciar test
 startBtn.addEventListener('click', () => {
+    loadState();
     startBtn.classList.add('hidden');
     testDiv.classList.remove('hidden');
     showInstructions();
+    saveState();
 });
 
 // Mostrar instrucciones
@@ -108,19 +110,25 @@ startTaskBtn.addEventListener('click', () => {
     taskCounter.classList.add('hidden');  // oculta el contador
     timerDiv.classList.add('hidden');     // oculta el tiempo
     loadTask();
+    saveState();
 });
 
-// Cronómetro (ya no se muestra en pantalla, pero sigue contando internamente)
+// Cronómetro ya no se muestra en pantalla, pero sigue contando internamente
 function startTimer() {
-    timeLeft = 45;
+    // Si timeLeft ya tiene un valor (restaurado), úsalo; si no, ponlo en 45 para el localstorage
+    if (typeof timeLeft !== "number" || timeLeft > 45 || timeLeft <= 0) {
+        timeLeft = 45;
+    }
     timer = setInterval(() => {
         timeLeft--;
+        saveState(); // Guarda el tiempo restante en cada tick
         if (timeLeft <= 0) {
             if (currentTask === 0) time_homework_p = 45;
             if (currentTask === 1) time_homework_c = 45;
             if (currentTask === 2) time_homework_pc = 45;
             time += 45;
             clearInterval(timer);
+            saveState();
             nextTask();
         }
     }, 1000);
@@ -145,6 +153,7 @@ function nextTrial() {
         if (currentTask === 0) p = scoresPorTarea[0];
         if (currentTask === 1) c = scoresPorTarea[1];
         if (currentTask === 2) pc = scoresPorTarea[2];
+        saveState();
         nextTask();
         return;
     }
@@ -180,6 +189,7 @@ function nextTrial() {
                 scoresPorTarea[currentTask]++;
             }
             currentTrial++;
+            saveState();
             nextTrial();
         };
         optionsDiv.appendChild(btn);
@@ -195,11 +205,13 @@ function nextTask() {
     if (currentTask === 1) time_homework_c = usedTime;
     if (currentTask === 2) time_homework_pc = usedTime;
     time += usedTime;
+    timeLeft = 45; // Reinicia el tiempo para la siguiente tarea
     currentTask++;
+    saveState();
     showInstructions();
 }
 
-// Resultado final
+
 // Variable para almacenar el resultado de la ecuación total_stroop
 let total_stroop = 0;
 
@@ -245,10 +257,92 @@ function showResult() {
     // Clasificación usando climb
     const climbResult = climb(total_stroop);
 
-    // Solo muestra "test completado"
+    //fin del test
     let detalle = `
         <h2>test completado</h2>
-        <button onclick="location.reload()">Reiniciar Test</button>
+        <a href="/backadmin/back.html" id="exit-link">salir</a>
     `;
     resultDiv.innerHTML = detalle;
+
+    // Limpiar el estado guardado al salir para permitir volver a hacer el test
+    const exitLink = document.getElementById('exit-link');
+    if (exitLink) {
+        exitLink.addEventListener('click', () => {
+            localStorage.removeItem('stroop_state');
+        });
+    }
 }
+
+// Guardar estado en localStorage
+function saveState() {
+    const state = {
+        currentTask,
+        currentTrial,
+        score,
+        scoresPorTarea,
+        p,
+        c,
+        pc,
+        P_C,
+        interference,
+        time_homework_p,
+        time_homework_c,
+        time_homework_pc,
+        time,
+        total_stroop,
+        timeLeft // <-- Guarda el tiempo restante de la tarea actual
+    };
+    localStorage.setItem('stroop_state', JSON.stringify(state));
+}
+
+// Cargar estado desde localStorage
+function loadState() {
+    const state = JSON.parse(localStorage.getItem('stroop_state'));
+    if (state) {
+        currentTask = state.currentTask;
+        currentTrial = state.currentTrial;
+        score = state.score;
+        scoresPorTarea = state.scoresPorTarea;
+        p = state.p;
+        c = state.c;
+        pc = state.pc;
+        P_C = state.P_C;
+        interference = state.interference;
+        time_homework_p = state.time_homework_p;
+        time_homework_c = state.time_homework_c;
+        time_homework_pc = state.time_homework_pc;
+        time = state.time;
+        total_stroop = state.total_stroop;
+        if (typeof state.timeLeft === "number") {
+            timeLeft = state.timeLeft; // <-- Restaura el tiempo restante
+        } else {
+            timeLeft = 45;
+        }
+    }
+}
+
+// Al cargar la página, si hay estado guardado, reanuda automáticamente
+window.addEventListener('DOMContentLoaded', () => {
+    const state = localStorage.getItem('stroop_state');
+    if (state) {
+        loadState();
+        startBtn.classList.add('hidden');
+        testDiv.classList.remove('hidden');
+        // Si estabas en medio de una tarea, reanuda la tarea
+        if (currentTask < tasks.length) {
+            showInstructions();
+            // Si ya habías empezado la tarea, reanuda la tarea directamente
+            if (currentTrial > 0 && currentTrial < respuestas.tarea1.length) {
+                startTaskBtn.classList.add('hidden');
+                instructions.classList.add('hidden');
+                taskTitle.classList.add('hidden');
+                taskCounter.classList.add('hidden');
+                timerDiv.classList.add('hidden');
+                loadTask();
+            }
+        } else {
+            showResult();
+        }
+    }
+});
+
