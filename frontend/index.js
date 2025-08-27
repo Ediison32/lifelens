@@ -1,11 +1,13 @@
 import { initTower } from "./resources/tower.js";
 import { login } from "./resources/login.js";
+// import { initStroop } from "./resources/stroop.js";
 
 // Definimos las rutas del SPA
 // Para agregar más ventanas, solo agrega aquí nuevas rutas y sus archivos HTML
 const routes = {
   "/login": "./views/login.html",
   "/tower": "./views/tower.html",
+  "/stroop": "./views/stroop.html"
   // "/otraVentana": "./views/otraVentana.html",  <-- ejemplo para futuras rutas
 };
 
@@ -41,6 +43,10 @@ export async function navigate(pathname) {
   } else if (pathname === "/tower") {
     // Aquí se carga la lógica del juego Tower
     initTower();
+  } else if (pathname === "/stroop") {
+    // Aquí se carga la lógica del juego Stroop
+    //initStroop();
+    console.log("stroop");
   }
   // Añadir más condiciones para futuras rutas
   // else if (pathname === "/otraVentana") {
