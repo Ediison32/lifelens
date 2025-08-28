@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -7,13 +8,16 @@
 
   <!-- GUARD: esto se ejecuta inmediatamente -->
   <script>
-    (function guard(){
+    (function guard() {
       try {
-        const data = JSON.parse(sessionStorage.getItem('belabs_auth') || 'null');
-        if (!data || data.role !== 'admin') {
-          console.warn('No auth -> redirect to login');
-          window.location.replace('login.html');
-        }
+        const data = localStorage.getItem('belabs_auth');
+
+        if (!data) throw new Error('No auth data');
+
+        // if (!data || data.role !== 'admin') {
+        //   console.warn('No auth -> redirect to login');
+        //   window.location.replace('login.html');
+        // }
       } catch (err) {
         console.error(err);
         window.location.replace('login.html');
@@ -23,6 +27,7 @@
 
   <link rel="stylesheet" href="admin.css">
 </head>
+
 <body>
 
   <aside class="sidebar">
@@ -58,7 +63,7 @@
             <td>betancur gomez</td>
             <td>medellin</td>
             <td>hopper</td>
-            <td><a class="btn-action" href="/backadmin/analitica.html">ver</a></td>
+            <td><a class="btn-action" href="/analitica.html">ver</a></td>
           </tr>
           <tr>
             <td>123456</td>
@@ -66,7 +71,7 @@
             <td>alvarez ortiz</td>
             <td>barranquilla</td>
             <td>hopper</td>
-            <td><a class="btn-action" href="/backadmin/analitica.html">ver</a></td>
+            <td><a class="btn-action" href="/analitica.html">ver</a></td>
           </tr>
         </tbody>
       </table>
@@ -78,10 +83,11 @@
     document.addEventListener('DOMContentLoaded', () => {
       const btn = document.getElementById('logoutBtn');
       btn?.addEventListener('click', () => {
-        sessionStorage.removeItem('belabs_auth');
+        localStorage.removeItem('belabs_auth');
         window.location.replace('login.html');
       });
     });
   </script>
 </body>
+
 </html>

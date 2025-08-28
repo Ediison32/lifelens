@@ -17,7 +17,21 @@ body {
 }
 
 .btn {
-  background: #4038d6;
+  padding: 10px 20px;
+  background: #b78dca;
   text-decoration: none;
   color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #a179b4;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
