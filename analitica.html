@@ -1,20 +1,94 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gráfico Radar - BeLabs</title>
-  <link rel="stylesheet" href="analitica.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados Analítica</title>
+    <link rel="stylesheet" href="analitica.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
-  <div class="chart-container">
-    <canvas id="radarChart"></canvas>
-  </div>
-  <a class="btn back-button" href="/admin.html">Regresar</a>
-  <script src="analitica.js"></script>
-</body>
+    <h2>Resultados de Evaluación</h2>
 
+    <div class="contenedor">
+
+      <button><a href="./admin.html">salir</a></button>
+
+        <!-- Tabla Stroop -->
+        <div class="card">
+            <h3>Escala Stroop</h3>
+            <table>
+                <tr><th>Respuestas</th><th>Valor</th></tr>
+                <tr><td>P</td><td>1.1</td></tr>
+                <tr><td>C</td><td>1.2</td></tr>
+                <tr><td>PC</td><td>1.3</td></tr>
+                <tr><td>PC/PC+C=PC*</td><td>0.57</td></tr>
+                <tr><td>PC-PC* Interferencia</td><td>0.72</td></tr>
+                <tr><td>Tiempo</td><td>60</td></tr>
+                <tr><td>Escala</td><td>Muy bajo</td></tr>
+            </table>
+        </div>
+
+        <!-- Tabla Go NoGo -->
+        <div class="card">
+            <h3>Tareas Go NoGo</h3>
+            <table>
+                <tr><th>Tarea</th><th>Tiempo</th><th>Respuestas</th><th>Puntuación</th></tr>
+                <tr><td>Tarea 1</td><td>40</td><td>50</td><td>1.25</td></tr>
+                <tr><td>Tarea 2</td><td>45</td><td>30</td><td>0.87</td></tr>
+                <tr><td>Tarea 3</td><td>45</td><td>20</td><td>0.44</td></tr>
+                <tr><td>Total</td><td colspan="3">33.3</td></tr>
+                <tr><td>Escala</td><td colspan="3">Medio</td></tr>
+            </table>
+        </div>
+
+        <!-- Tabla Torre Hanoi -->
+        <div class="card">
+            <h3>Torre de Hanoi</h3>
+            <table>
+                <tr><th>Parámetro</th><th>Valor</th></tr>
+                <tr><td>Número de Piezas</td><td>6</td></tr>
+                <tr><td>Piezas en otro lateral</td><td>5</td></tr>
+                <tr><td>Tiempo</td><td>46</td></tr>
+                <tr><td>Total Calificación</td><td>5.0</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Tabla Trail Making Test -->
+    <div class="card full">
+        <h3>Trail Making Test</h3>
+        <table>
+            <tr><td>Aciertos Tarea A</td><td>25</td></tr>
+            <tr><td>Tiempo Tarea A</td><td>30.2</td></tr>
+            <tr><td>Puntaje Tarea A</td><td>0.83</td></tr>
+            <tr><td>Aciertos Tarea B</td><td>24</td></tr>
+            <tr><td>Tiempo Tarea B</td><td>65</td></tr>
+            <tr><td>Puntaje Tarea B</td><td>0.49</td></tr>
+            <tr><td>Total Aciertos</td><td>49</td></tr>
+            <tr><td>Total Prueba</td><td>1.2</td></tr>
+        </table>
+    </div>
+
+    <!-- Tabla de Resultados finales -->
+    <div class="card full">
+        <h3>Resultados</h3>
+        <table>
+            <tr><td>Control inhibitorio</td><td>0.85</td></tr>
+            <tr><td>Funcionamiento ejecutivo</td><td>5.1</td></tr>
+            <tr><td>Memoria de trabajo</td><td>0.85</td></tr>
+            <tr><td>Flexibilidad Cognitiva</td><td>5.8</td></tr>
+            <tr><td>Planificación</td><td>6.2</td></tr>
+            <tr><td>Aprendizaje Estratégico</td><td>6.0</td></tr>
+            <tr><td>Velocidad de procesamiento</td><td>8.2</td></tr>
+        </table>
+    </div>
+
+    <!-- Gráfica -->
+    <div class="grafica">
+        <canvas id="radarChart"></canvas>
+    </div>
+
+    <script src="analitica.js" type=" module></script>
+</body>
 </html>

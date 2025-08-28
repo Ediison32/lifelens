@@ -44,7 +44,7 @@
       <button class="btn-action" id="logoutBtn">Cerrar sesión</button>
     </header>
 
-    <section class="card">
+<section class="card">
       <table>
         <thead>
           <tr>
@@ -56,26 +56,12 @@
             <th>analizar</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>123456</td>
-            <td>juan</td>
-            <td>betancur gomez</td>
-            <td>medellin</td>
-            <td>hopper</td>
-            <td><a class="btn-action" href="/analitica.html">ver</a></td>
-          </tr>
-          <tr>
-            <td>123456</td>
-            <td>jose</td>
-            <td>alvarez ortiz</td>
-            <td>barranquilla</td>
-            <td>hopper</td>
-            <td><a class="btn-action" href="/analitica.html">ver</a></td>
-          </tr>
+        <tbody id="usersTableBody">
+          <!-- Los usuarios se renderizan aquí dinámicamente -->
         </tbody>
       </table>
     </section>
+  
   </main>
 
   <script>
@@ -91,3 +77,4 @@
 </body>
 
 </html>
+<script src="./services/render.js" type="module" ></script>
