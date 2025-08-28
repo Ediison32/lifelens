@@ -22,12 +22,13 @@ header p {
 }
 
 .test-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
   gap: 20px;
   padding: 30px;
   max-width: 1200px;
   margin: auto;
+  align-items: center;
+  justify-content: center;
 }
 
 .test-card {
@@ -37,7 +38,7 @@ header p {
   overflow: hidden;
   transition: transform 0.2s;
   text-align: center;
-  width: 900px;
+  width: 500px;
 }
 
 .test-card:hover {
