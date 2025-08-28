@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Go/No-Go + Stroop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Estilos de ambos juegos -->
+    <link rel="stylesheet" href="styleGono.css" />
+    <link rel="stylesheet" href="stylestroop.css" />
+</head>
+
+<body class="bg-light text-center">
+    <main class="container py-4">
+
+        <!-- ============ Go/No-Go (tu HTML original) ============ -->
+        <section id="goNoGo-section">
+            <h1>Juego Go/No-Go</h1>
+            <div id="encabezado">
+                <button id="start" class="btn btn-custom mt-4">Iniciar</button>
+            </div>
+
+            <!-- Pantalla de introducción de etapa -->
+            <div id="stage-intro" class="d-none">
+                <h2 id="stage-title" class="mb-2"></h2>
+                <p id="stage-instructions" class="mb-2"></p>
+                <p id="stage-progress" class="text-secondary"></p>
+                <button id="begin-stage" class="btn btn-custom mt-2">Comenzar Etapa</button>
+            </div>
+
+            <!-- Estímulo -->
+            <div id="stimulus" class="mt-4" style="display: none;"></div>
+
+            <!-- Resultados -->
+            <div id="results" class="mt-4"></div>
+
+            <!-- Controles -->
+            <div>
+                <div id="section-si-no-otro" class="d-none">
+                    <button id="si" class="btn btn-custom">SÍ</button>
+                    <button id="no" class="btn btn-custom">NO</button>
+                    <button id="otro" class="btn btn-custom">OTRO</button>
+                </div>
+
+                <div id="section-colores" class="d-none">
+                    <button id="rojo" class="btn btn-custom">rojo</button>
+                    <button id="azul" class="btn btn-custom">azul</button>
+                    <button id="otro-color" class="btn btn-custom">Otro</button>
+                </div>
+
+                <div id="section-signals" class="d-none">
+                    <button id="xl" class="btn btn-custom">&gt;</button>
+                    <button id="l" class="btn btn-custom">/</button>
+                    <button id="xx" class="btn btn-custom">x</button>
+                    <button id="otro-signo" class="btn btn-custom">Otro</button>
+                </div>
+
+                <!-- Botón siguiente etapa -->
+                <button id="next-stage" class="d-none">Siguiente etapa</button>
+            </div>
+        </section>
+
+        <!-- ============ Stroop (mismo contenido, IDs prefijados) ============ -->
+        <section id="stroop-section" class="d-none">
+            <h2>Test de Stroop</h2>
+
+            <div id="stroop-container">
+                <button id="stroop-start-btn">Iniciar Test</button>
+
+                <div id="stroop-test" class="hidden">
+                    <h2 id="stroop-task-title"></h2>
+                    <p id="stroop-instructions"></p>
+                    <p id="stroop-task-counter"></p>
+                    <button id="stroop-start-task-btn" class="hidden">Comenzar Tarea</button>
+                    <div id="stroop-timer" class="hidden"></div>
+                    <div class="stimulus" id="stroop-stimulus"></div>
+                    <div class="options" id="stroop-options"></div>
+                </div>
+
+                <div id="stroop-result" class="hidden"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
