@@ -28,7 +28,7 @@ export async function login() {
           // Guardamos el usuario en localStorage (string, por ahora no JSON)
           localStorage.setItem('user', user);
           // Navegamos a la ventana Tower
-          navigate('/stroop');
+          navigate('/gonogo');
         } else {
           message.textContent = 'Usuario incorrecto.';
         }

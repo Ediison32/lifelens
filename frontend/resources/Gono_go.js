@@ -1,4 +1,4 @@
-export default class initGoNoGo {
+export default class GoNoGoGame {
 
     static #STAGE_DURATION_MS = 45000; // 45s por etapa
     static #MAX_RESPONSE = 100;

@@ -1,7 +1,8 @@
 import { initTower } from "./resources/tower.js";
 import { login } from "./resources/login.js";
 import { initStroop } from "./resources/stroop.js";
-import { initGoNoGo } from "./resources/gono_go.js";
+import GoNoGoGame from "./resources/Gono_go.js";
+import { initTMT } from "./resources/tmt.js";
 
 
 // Definimos las rutas del SPA
@@ -9,8 +10,15 @@ const routes = {
   "/login": "./views/login.html",
   "/tower": "./views/tower.html",
   "/stroop": "./views/stroop.html",
-  "/gonogo": "./views/go-n-go.html"
+  "/gonogo": "./views/gonogo.html",
+  "/tmt": "./views/tmt.html"
 };
+
+
+
+
+
+
 
 // Variable para llevar el CSS activo
 let activeCSS = null;
@@ -58,6 +66,8 @@ export async function navigate(pathname) {
   const cssMap = {
     "/tower": "./resources/tower.css",
     "/stroop": "./resources/stroop.css",
+    "/gonogo": "./resources/gonogo.css",
+    "/tmt": "./resources/tmt.css"
     // "/login" no carga CSS adicional
   };
 
@@ -84,6 +94,10 @@ export async function navigate(pathname) {
     initTower();
   } else if (pathname === "/stroop") {
     initStroop();
+  } else if (pathname === "/gonogo") {
+    initGoNoGo();
+  } else if (pathname === "/tmt") {
+    initTMT();
   }
 }
 
@@ -108,12 +122,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
   if (currentUser) {
     if (currentPath === "/" || !routes[currentPath]) {
-      navigate("/tower");
+      navigate("/stroop");
     } else {
       navigate(currentPath);
     }
   } else {
-    if (!routes[currentPath] || currentPath === "/" || currentPath === "/tower") {
+    if (!routes[currentPath] || currentPath === "/" || currentPath === "/tower" || currentPath === "/stroop" || currentPath === "/gonogo") {
       navigate("/login");
     } else {
       navigate(currentPath);
@@ -140,3 +154,35 @@ window.addEventListener("DOMContentLoaded", () => {
 // }
 
 
+// Variables de david
+
+function initGoNoGo() {
+  const gngSection = document.getElementById('goNoGo-section');
+  const stroopSection = document.getElementById('stroop-section');
+
+
+  const participantId = 'participante-test-01';//------------
+  const sessionId = 'sesion-test-abc'; //--------------
+
+
+  const onGngComplete = (results) => {
+    console.log('Go/No-Go finalizado. Resultados:', results);
+
+    gngSection.classList.add('d-none');
+    stroopSection.classList.remove('d-none');
+
+    // Inicia el juego Stroop
+    new StroopGame(stroopSection, onStroopComplete, {
+      participantId,
+      sessionId,
+      debug: true
+    });
+  };
+
+  const onStroopComplete = (results) => {
+    console.log('Stroop finalizado. Resultados:', results);
+    stroopSection.innerHTML = '<h1>¡Has completado todos los juegos!</h1>';
+  };
+
+  new GoNoGoGame(gngSection, onGngComplete, { participantId, sessionId, debug: true });
+};
