@@ -37,6 +37,7 @@ header p {
   overflow: hidden;
   transition: transform 0.2s;
   text-align: center;
+  width: 900px;
 }
 
 .test-card:hover {

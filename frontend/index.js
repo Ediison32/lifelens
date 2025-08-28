@@ -1,30 +1,45 @@
 import { initTower } from "./resources/tower.js";
 import { login } from "./resources/login.js";
-// import { initStroop } from "./resources/stroop.js";
+import { initStroop } from "./resources/stroop.js";
 
 // Definimos las rutas del SPA
-// Para agregar más ventanas, solo agrega aquí nuevas rutas y sus archivos HTML
 const routes = {
   "/login": "./views/login.html",
   "/tower": "./views/tower.html",
   "/stroop": "./views/stroop.html"
-  // "/otraVentana": "./views/otraVentana.html",  <-- ejemplo para futuras rutas
 };
 
-// Manejamos los clicks en enlaces con el atributo [data-link] para navegación SPA
-document.body.addEventListener("click", (e) => {
-  if (e.target.matches("[data-link]")) {
-    e.preventDefault();
-    const path = e.target.getAttribute("href");
-    navigate(path);
+// Variable para llevar el CSS activo
+let activeCSS = null;
+
+// Función para cargar un CSS dinámicamente
+function loadCSS(href) {
+  return new Promise((resolve, reject) => {
+    // Si ya existe este CSS, resolver inmediatamente
+    if (document.querySelector(`link[href="${href}"]`)) {
+      resolve();
+      return;
+    }
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = href;
+    link.onload = () => resolve();
+    link.onerror = () => reject(`Error cargando CSS: ${href}`);
+    document.head.appendChild(link);
+  });
+}
+
+// Función para descargar un CSS
+function unloadCSS(href) {
+  const link = document.querySelector(`link[href="${href}"]`);
+  if (link) {
+    document.head.removeChild(link);
   }
-});
+}
 
 // Función para navegar entre rutas
 export async function navigate(pathname) {
   const route = routes[pathname];
-
-  // Si la ruta no existe, vamos a /login o podrías mostrar un 404 aquí
   if (!route) {
     return navigate("/login");
   }
@@ -36,44 +51,65 @@ export async function navigate(pathname) {
   // Actualizamos el URL sin recargar la página
   history.pushState({}, "", pathname);
 
-  // Ejecutamos la función correspondiente según la ruta
+  // Mapeo de rutas a archivos CSS
+  const cssMap = {
+    "/tower": "./resources/tower.css",
+    "/stroop": "./resources/stroop.css",
+    // "/login" no carga CSS adicional
+  };
+
+  // Descargar CSS previo si es diferente al actual
+  if (activeCSS && activeCSS !== cssMap[pathname]) {
+    unloadCSS(activeCSS);
+    activeCSS = null;
+  }
+
+  // Cargar CSS correspondiente a la ruta si no está cargado
+  if (cssMap[pathname] && activeCSS !== cssMap[pathname]) {
+    try {
+      await loadCSS(cssMap[pathname]);
+      activeCSS = cssMap[pathname];
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // Ejecutar la lógica correspondiente a la ruta
   if (pathname === "/login") {
-    // Aquí se carga la lógica de login
     login();
   } else if (pathname === "/tower") {
-    // Aquí se carga la lógica del juego Tower
     initTower();
   } else if (pathname === "/stroop") {
-    // Aquí se carga la lógica del juego Stroop
-    //initStroop();
-    console.log("stroop");
+    initStroop();
   }
-  // Añadir más condiciones para futuras rutas
-  // else if (pathname === "/otraVentana") {
-  //   initOtraVentana();
-  // }
 }
+
+// Manejamos los clicks en enlaces con el atributo [data-link] para navegación SPA
+document.body.addEventListener("click", (e) => {
+  if (e.target.matches("[data-link]")) {
+    e.preventDefault();
+    const path = e.target.getAttribute("href");
+    navigate(path);
+  }
+});
 
 // Detectamos el botón "atrás" y navegamos sin recargar
 window.addEventListener("popstate", () => {
   navigate(location.pathname);
 });
 
-// Al cargar la página, verificamos si hay un usuario en localStorage
+// Al cargar la página, verificamos si hay un usuario en localStorage y navegamos
 window.addEventListener("DOMContentLoaded", () => {
-  const currentUser = localStorage.getItem("user"); // Por ahora guardas el user como string
+  const currentUser = localStorage.getItem("user");
   const currentPath = location.pathname;
 
   if (currentUser) {
-    // Si el usuario ya está en localStorage, cargamos la ventana 'tower'
-    // En futuro, aquí podrías hacer una validación del token o sesión en backend
     if (currentPath === "/" || !routes[currentPath]) {
       navigate("/tower");
     } else {
       navigate(currentPath);
     }
   } else {
-    // Si no hay usuario, cargamos la ventana de registro
     if (!routes[currentPath] || currentPath === "/" || currentPath === "/tower") {
       navigate("/login");
     } else {
@@ -81,6 +117,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
 
 
 
