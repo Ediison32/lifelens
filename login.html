@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BeLabs - Login</title>
+  <link rel="stylesheet" href="login.css">
+  <!--defer para el dom -->
+  <script defer src="loginadmin.js"></script>
+</head>
+<body>
+  <div class="login-card">
+    <h1>&lt;BeLabs&gt;</h1>
+    <p class="subtitle">Acceso Administrador</p>
+
+    <form id="loginForm" autocomplete="off">
+      <label for="username">Usuario</label>
+      <input id="username" name="username" type="text" placeholder="user" required />
+
+      <label for="password">Contraseña</label>
+      <input id="password" name="password" type="password" placeholder="-------" required />
+
+      <button type="submit" class="btn">Ingresar</button>
+      <p id="error" class="error" aria-live="polite"></p>
+    </form>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BeLabs - Gestión de Usuarios</title>
+
+  <!-- GUARD: esto se ejecuta inmediatamente -->
+  <script>
+    (function guard(){
+      try {
+        const data = JSON.parse(sessionStorage.getItem('belabs_auth') || 'null');
+        if (!data || data.role !== 'admin') {
+          console.warn('No auth -> redirect to login');
+          window.location.replace('login.html');
+        }
+      } catch (err) {
+        console.error(err);
+        window.location.replace('login.html');
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <aside class="sidebar">
+    <h2 class="logo">&lt;BeLabs&gt;</h2>
+    <ul class="menu">
+      <li><a href="#"><span></span> Panel de Control</a></li>
+    </ul>
+  </aside>
+
+  <main class="main">
+    <header class="header">
+      <h1>Gestión de Usuarios</h1>
+      <p>Administra BeLabs</p>
+      <button class="btn-action" id="logoutBtn">Cerrar sesión</button>
+    </header>
+
+    <section class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>documento</th>
+            <th>nombre</th>
+            <th>apellidos</th>
+            <th>ciudad</th>
+            <th>clan</th>
+            <th>analizar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>123456</td>
+            <td>juan</td>
+            <td>betancur gomez</td>
+            <td>medellin</td>
+            <td>hopper</td>
+            <td><a class="btn-action" href="/backadmin/analitica.html">ver</a></td>
+          </tr>
+          <tr>
+            <td>123456</td>
+            <td>jose</td>
+            <td>alvarez ortiz</td>
+            <td>barranquilla</td>
+            <td>hopper</td>
+            <td><a class="btn-action" href="/backadmin/analitica.html">ver</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    // esperamos DOM
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('logoutBtn');
+      btn?.addEventListener('click', () => {
+        sessionStorage.removeItem('belabs_auth');
+        window.location.replace('login.html');
+      });
+    });
+  </script>
+</body>
+</html>

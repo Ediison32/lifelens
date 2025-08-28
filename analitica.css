@@ -1,0 +1,23 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f4f6fb;
+  font-family: Arial, sans-serif;
+}
+
+.chart-container {
+  width: 600px;
+  height: 600px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+}
+
+.btn {
+  background: #4038d6;
+  text-decoration: none;
+  color: #fff;
+}

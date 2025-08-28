@@ -1,0 +1,160 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+body {
+  display: flex;
+  background: #f8f9fc;
+  color: #333;
+}
+
+
+.sidebar {
+  width: 230px;
+  background: #1e1e5a;
+  color: #fff;
+  height: 100vh;
+  padding: 25px 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.menu {
+  list-style: none;
+}
+
+.menu li {
+  margin: 18px 0;
+}
+
+.menu a {
+  color: #b0c7f5;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.menu a:hover {
+  background: #35359c;
+  color: #fff;
+}
+
+
+.main {
+  margin-left: 230px;
+  padding: 40px;
+  width: calc(100% - 230px);
+}
+
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 24px;
+  color: #1e1e5a;
+}
+
+.header p {
+  color: #666;
+  margin-top: 5px;
+  flex: 1;
+  margin-left: 20px;
+}
+
+.btn-primary {
+  background: #5a54f8;
+  color: #fff;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: #4038d6;
+}
+
+
+.card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 6px 18px rgba(0,0,0,0.06);
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f0f2f9;
+  color: #555;
+  font-weight: 600;
+}
+
+th, td {
+  text-align: left;
+  padding: 14px;
+  font-size: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+tbody tr:hover {
+  background: #f9f9ff;
+}
+
+
+.btn-action {
+  background: #e5e5ff;
+  color: #4038d6;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  margin-right: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.btn-action:hover {
+  background: #d1d1ff;
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 5px;
+}
+
+.btn-action{
+  color: #4038d6;
+  border: none;
+}
