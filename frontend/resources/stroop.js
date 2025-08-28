@@ -67,16 +67,16 @@ export function initStroop() {
     let time = 0; // Variable para almacenar el tiempo total en segundos
 
     // DOM
-    const startBtn = document.getElementById('start-btn');
-    const startTaskBtn = document.getElementById('start-task-btn');
-    const testDiv = document.getElementById('test');
-    const taskTitle = document.getElementById('task-title');
-    const instructions = document.getElementById('instructions');
-    const stimulusDiv = document.getElementById('stimulus');
-    const optionsDiv = document.getElementById('options');
-    const resultDiv = document.getElementById('result');
-    const timerDiv = document.getElementById('timer');
-    const taskCounter = document.getElementById('task-counter');
+    const startBtn = document.getElementById('stroop-start-btn');
+    const startTaskBtn = document.getElementById('stroop-start-task-btn');
+    const testDiv = document.getElementById('stroop-test');
+    const taskTitle = document.getElementById('stroop-task-title');
+    const instructions = document.getElementById('stroop-instructions');
+    const stimulusDiv = document.getElementById('stroop-stimulus');
+    const optionsDiv = document.getElementById('stroop-options');
+    const resultDiv = document.getElementById('stroop-result');
+    const timerDiv = document.getElementById('stroop-timer');
+    const taskCounter = document.getElementById('stroop-task-counter');
 
 
 

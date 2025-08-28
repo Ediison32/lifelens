@@ -1,12 +1,15 @@
 import { initTower } from "./resources/tower.js";
 import { login } from "./resources/login.js";
 import { initStroop } from "./resources/stroop.js";
+import { initGoNoGo } from "./resources/gono_go.js";
+
 
 // Definimos las rutas del SPA
 const routes = {
   "/login": "./views/login.html",
   "/tower": "./views/tower.html",
-  "/stroop": "./views/stroop.html"
+  "/stroop": "./views/stroop.html",
+  "/gonogo": "./views/go-n-go.html"
 };
 
 // Variable para llevar el CSS activo
