@@ -110,6 +110,7 @@ h2 {
 
 /* Botones de navegación consistentes con Go-NoGo */
 #stroop-start-btn,
+#stroop-next-test-btn,
 #stroop-start-task-btn {
     font-size: 1.4rem;
     padding: 16px 38px;
@@ -163,7 +164,7 @@ h2 {
     color: #333;
 }
 
-#stroop-result button {
+/* #stroop-result button {
     margin-top: 24px;
     background: #8a2be2;
     color: #fff;
@@ -173,8 +174,9 @@ h2 {
     padding: 12px 30px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s; 
 }
+    */
 
 #stroop-result button:hover {
     background: #6c1bb1;

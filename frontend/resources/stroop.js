@@ -79,15 +79,7 @@ export function initStroop() {
     const taskCounter = document.getElementById('stroop-task-counter');
 
 
-
-
-
-
-
-
-
     // Iniciar test
-
 
     startBtn.addEventListener('click', () => {
         loadState();
@@ -278,17 +270,19 @@ export function initStroop() {
         //fin del test
         let detalle = `
     <h2>test completado</h2>
-    <a href="/backadmin/back.html" id="exit-link">salir</a>
+    <button id="stroop-next-test-btn">
+    <a href="/gonogo" id="stroop-next-test-link">Siguiente test</a>
+    </button>
     `;
         resultDiv.innerHTML = detalle;
 
         // Limpiar el estado guardado al salir para permitir volver a hacer el test
-        const exitLink = document.getElementById('exit-link');
-        if (exitLink) {
-            exitLink.addEventListener('click', () => {
-                localStorage.removeItem('stroop_state');
-            });
-        }
+        // const exitLink = document.getElementById('stroop-next-test-link');
+        // if (exitLink) {
+        //     exitLink.addEventListener('click', () => {
+        //         localStorage.removeItem('stroop_state');
+        //     });
+        // }
     }
 
     // Guardar estado en localStorage

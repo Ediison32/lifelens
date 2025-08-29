@@ -16,10 +16,6 @@ const routes = {
 
 
 
-
-
-
-
 // Variable para llevar el CSS activo
 let activeCSS = null;
 
@@ -121,23 +117,20 @@ window.addEventListener("DOMContentLoaded", () => {
   const currentPath = location.pathname;
 
   if (currentUser) {
+    console.log("usuario vista ")
     if (currentPath === "/" || !routes[currentPath]) {
-      navigate("/stroop");
+      navigate(currentPath);
     } else {
       navigate(currentPath);
     }
   } else {
-    if (!routes[currentPath] || currentPath === "/" || currentPath === "/tower" || currentPath === "/stroop" || currentPath === "/gonogo") {
+    if (!routes[currentPath] || currentPath === "/" || currentPath === "/tower" || currentPath === "/stroop" || currentPath === "/gonogo" || currentPath === "/tmt") {
       navigate("/login");
     } else {
       navigate(currentPath);
     }
   }
 });
-
-
-
-
 
 
 //Cerrar sesion
@@ -157,7 +150,7 @@ window.addEventListener("DOMContentLoaded", () => {
 // Variables de david
 
 function initGoNoGo() {
-  const gngSection = document.getElementById('goNoGo-section');
+  const gngSection = document.getElementById('GoNoGo-section');
   const stroopSection = document.getElementById('stroop-section');
 
 
