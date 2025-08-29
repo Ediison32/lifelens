@@ -119,7 +119,7 @@ window.addEventListener("DOMContentLoaded", () => {
   if (currentUser) {
     console.log("usuario vista ")
     if (currentPath === "/" || !routes[currentPath]) {
-      navigate(currentPath);
+      navigate("/stroop");
     } else {
       navigate(currentPath);
     }
@@ -164,18 +164,8 @@ function initGoNoGo() {
     gngSection.classList.add('d-none');
     stroopSection.classList.remove('d-none');
 
-    // Inicia el juego Stroop
-    new StroopGame(stroopSection, onStroopComplete, {
-      participantId,
-      sessionId,
-      debug: true
-    });
   };
 
-  const onStroopComplete = (results) => {
-    console.log('Stroop finalizado. Resultados:', results);
-    stroopSection.innerHTML = '<h1>¡Has completado todos los juegos!</h1>';
-  };
 
   new GoNoGoGame(gngSection, onGngComplete, { participantId, sessionId, debug: true });
 };

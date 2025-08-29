@@ -5,37 +5,37 @@ export async function login() {
   const message = document.getElementById('message');
   const loginForm = document.getElementById('login-form-id');
 
-  // Escuchar el submit del formulario de registro/login
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const username = document.getElementById('user').value;
+    const username = document.getElementById('user').value.trim(); // El documento (username)
+    const API_URL = 'https://lifelens-db.vercel.app/document';
 
-
-    // Por ahora manejas usuario fijo para pruebas
-    const user = "1234";
+    if (!username) {
+      message.textContent = 'Por favor ingresa tu documento.';
+      return;
+    }
 
     try {
-      //const URL = XXX/
-      // FUTURO: Aquí se puede hacer fetch a tu backend para validar usuario y contraseña, ejemplo:
-      // const response = await fetch('URL/document/123456789', { method: 'POST', body: JSON.stringify({username}) });
-      // const data = await response.json();
-      // if(data.success) { ... }
+      const response = await fetch(`${API_URL}/${username}`);
 
-      if (username) {
-
-        if (username === user) {
-          // Guardamos el usuario en localStorage (string, por ahora no JSON)
-          localStorage.setItem('user', user);
-          // Navegamos a la ventana Tower
-          navigate('/stroop');
-        } else {
-          message.textContent = 'Usuario incorrecto.';
-        }
+      if (!response.ok) {
+        message.textContent = 'Usuario no encontrado.';
+        return;
       }
+
+      const userData = await response.json();
+
+      // Guardar toda la información del usuario en localStorage (como string)
+      localStorage.setItem('user', JSON.stringify(userData));
+
+      // Redirigir a la siguiente página
+      navigate('/stroop');
+
     } catch (error) {
-      console.error(error);
+      console.error('Error al iniciar sesión:', error);
       message.textContent = 'Error al iniciar. Inténtalo de nuevo.';
     }
   });
 }
+
