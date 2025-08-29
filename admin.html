@@ -5,6 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BeLabs - Gestión de Usuarios</title>
+   <link rel="stylesheet" href="admin.css">
 
   <!-- GUARD: esto se ejecuta inmediatamente -->
   <script>
@@ -25,13 +26,16 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="admin.css">
 </head>
 
 <body>
 
   <aside class="sidebar">
     <h2 class="logo">&lt;BeLabs&gt;</h2>
+    <div class="user-profile">
+      <img src="https://avatar.iran.liara.run/public/38" alt="Foto de perfil" id="profilePicture" class="user-profile__picture">
+      <p id="userEmail" class="user-profile__email"></p>
+    </div>
     <ul class="menu">
       <li><a href="#"><span></span> Panel de Control</a></li>
     </ul>
@@ -72,6 +76,26 @@
         localStorage.removeItem('belabs_auth');
         window.location.replace('login.html');
       });
+
+      try {
+        const authDataString = localStorage.getItem('belabs_auth');
+        if (!authDataString) throw new Error('No auth data');
+
+        const authData = JSON.parse(authDataString);
+
+        const emailElement = document.getElementById('userEmail');
+        const pictureElement = document.getElementById('profilePicture');
+
+        if (emailElement && authData.email) {
+          emailElement.textContent = authData.email;
+        }
+
+        if (pictureElement && authData.photoUrl) {
+          pictureElement.src = authData.photoUrl;
+        }
+      } catch (err) {
+        console.error('Error al cargar datos de usuario:', err);
+      }
     });
   </script>
 </body>

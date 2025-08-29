@@ -10,9 +10,15 @@
 <body>
     <h2>Resultados de Evaluación</h2>
 
-    <div class="contenedor">
+    <a href="./admin.html" class="btn-back">Volver al Panel</a>
+    <div class="user-info-header">
+      <p><strong>Nombre:</strong> <span id="userName"></span></p>
+      <p><strong>Documento:</strong> <span id="userDocument"></span></p>
+      <p><strong>Clan:</strong> <span id="userClan"></span></p>
+    </div>
 
-      <button><a href="./admin.html">salir</a></button>
+
+    <div class="contenedor">
 
         <!-- Tabla Stroop -->
         <div class="card">
@@ -53,35 +59,35 @@
                 <tr><td>Total Calificación</td><td>5.0</td></tr>
             </table>
         </div>
-    </div>
 
-    <!-- Tabla Trail Making Test -->
-    <div class="card full">
-        <h3>Trail Making Test</h3>
-        <table>
-            <tr><td>Aciertos Tarea A</td><td>25</td></tr>
-            <tr><td>Tiempo Tarea A</td><td>30.2</td></tr>
-            <tr><td>Puntaje Tarea A</td><td>0.83</td></tr>
-            <tr><td>Aciertos Tarea B</td><td>24</td></tr>
-            <tr><td>Tiempo Tarea B</td><td>65</td></tr>
-            <tr><td>Puntaje Tarea B</td><td>0.49</td></tr>
-            <tr><td>Total Aciertos</td><td>49</td></tr>
-            <tr><td>Total Prueba</td><td>1.2</td></tr>
-        </table>
-    </div>
+        <!-- Tabla Trail Making Test -->
+        <div class="card">
+            <h3>Trail Making Test</h3>
+            <table>
+                <tr><td>Aciertos Tarea A</td><td>25</td></tr>
+                <tr><td>Tiempo Tarea A</td><td>30.2</td></tr>
+                <tr><td>Puntaje Tarea A</td><td>0.83</td></tr>
+                <tr><td>Aciertos Tarea B</td><td>24</td></tr>
+                <tr><td>Tiempo Tarea B</td><td>65</td></tr>
+                <tr><td>Puntaje Tarea B</td><td>0.49</td></tr>
+                <tr><td>Total Aciertos</td><td>49</td></tr>
+                <tr><td>Total Prueba</td><td>1.2</td></tr>
+            </table>
+        </div>
 
-    <!-- Tabla de Resultados finales -->
-    <div class="card full">
-        <h3>Resultados</h3>
-        <table>
-            <tr><td>Control inhibitorio</td><td>0.85</td></tr>
-            <tr><td>Funcionamiento ejecutivo</td><td>5.1</td></tr>
-            <tr><td>Memoria de trabajo</td><td>0.85</td></tr>
-            <tr><td>Flexibilidad Cognitiva</td><td>5.8</td></tr>
-            <tr><td>Planificación</td><td>6.2</td></tr>
-            <tr><td>Aprendizaje Estratégico</td><td>6.0</td></tr>
-            <tr><td>Velocidad de procesamiento</td><td>8.2</td></tr>
-        </table>
+        <!-- Tabla de Resultados finales -->
+        <div class="card">
+            <h3>Resultados</h3>
+            <table>
+                <tr><td>Control inhibitorio</td><td>0.85</td></tr>
+                <tr><td>Funcionamiento ejecutivo</td><td>5.1</td></tr>
+                <tr><td>Memoria de trabajo</td><td>0.85</td></tr>
+                <tr><td>Flexibilidad Cognitiva</td><td>5.8</td></tr>
+                <tr><td>Planificación</td><td>6.2</td></tr>
+                <tr><td>Aprendizaje Estratégico</td><td>6.0</td></tr>
+                <tr><td>Velocidad de procesamiento</td><td>8.2</td></tr>
+            </table>
+        </div>
     </div>
 
     <!-- Gráfica -->
@@ -89,6 +95,6 @@
         <canvas id="radarChart"></canvas>
     </div>
 
-    <script src="analitica.js" type=" module></script>
+    <script src="analitica.js" type="module"></script>
 </body>
 </html>

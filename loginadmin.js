@@ -14,8 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log("Usuario autenticado:", userCredential.user);
-      localStorage.setItem('belabs_auth', userCredential.user.uid)
+      const user = userCredential.user;
+      console.log("Usuario autenticado:", user);
+
+      // Guardamos un objeto con los datos del usuario en localStorage
+      const userData = {
+        email: user.email,
+        photoUrl: user.photoURL, // Firebase lo provee como photoURL
+        uid: user.uid,
+      };
+      localStorage.setItem('belabs_auth', JSON.stringify(userData));
       // Redirige al dashboard
       window.location.href = "admin.html";
     } catch (error) {

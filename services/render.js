@@ -18,7 +18,7 @@ export async function renderUsers() {
       <td>${user.clan}</td>
       <td>
         <a class="btn-action" href="./analitica.html?id=${user.id_user}" data-id="${user.id_user}">Ver</a>
-        <button class="btn-delete" data-id="${user.id_user}">Eliminar</button>
+        <button class="btn-action btn-delete" data-id="${user.id_user}">Eliminar</button>
       </td>
     `;
     tbody.appendChild(tr);
@@ -85,12 +85,12 @@ export async function cargarAnalitica() {
 
 // ----------- Inicialización según la página -----------
 document.addEventListener("DOMContentLoaded", () => {
-  // Si existe la tabla de usuarios, estamos en admin.html
-  if (document.querySelector("table tbody")) {
+  // Solo ejecuta renderUsers si es admin.html
+  if (window.location.pathname.includes("admin.html")) {
     renderUsers();
   }
-  // Si existe el canvas de la gráfica, estamos en analitica.html
-  if (document.getElementById("radarChart")) {
+  // Solo ejecuta cargarAnalitica si es analitica.html
+  if (window.location.pathname.includes("analitica.html")) {
     cargarAnalitica();
   }
 });
