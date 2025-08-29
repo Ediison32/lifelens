@@ -176,8 +176,136 @@ tbody tr:hover {
   font-size: 16px;
   margin: 0 5px;
 }
-
-.btn-action{
-  color: #4038d6;
+ 
+/* --- Estilos específicos para botones de la cabecera --- */
+.btn-add {
+  background-color: #5a54f8;
+  color: #fff;
+  padding: 10px 16px;
   border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-add:hover {
+  border: 1px solid;
+  background-color: #ccc;
+}
+
+#logoutBtn {
+  background-color: #5a54f8; 
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.3s;
+  margin-left: 10px;
+}
+
+#logoutBtn:hover {
+  background-color: #5a54f8;
+}
+
+/* --- Estilos del Modal --- */
+.modal {
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show {
+  display: flex; /* Se muestra con flex para centrar */
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 25px 30px;
+  width: 90%;
+  max-width: 550px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: slide-down 0.4s ease-out;
+}
+
+@keyframes slide-down {
+  from {transform: translateY(-50px); opacity: 0}
+  to {transform: translateY(0); opacity: 1}
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #1e1e5a;
+}
+
+.close-button {
+  color: #aaa;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: #000;
+}
+
+.modal-body {
+  padding: 20px 0 0;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Botón de guardar dentro del modal */
+.modal-body .btn-action {
+    background: #5a54f8;
+    color: #fff;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    margin-right: 0;
+}
+
+.modal-body .btn-action:hover {
+    background: #4038d6;
 }

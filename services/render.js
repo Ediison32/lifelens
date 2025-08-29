@@ -13,7 +13,9 @@ export async function renderUsers() {
     tr.innerHTML = `
       <td>${user.document}</td>
       <td>${user.name}</td>
-      <td>${user.last_name} ${user.last_name2 ?? ""}</td>
+      <td>${user.name2}</td>
+      <td>${user.last_name}</td>
+      <td>${user.last_name2}</td>
       <td>${user.city}</td>
       <td>${user.clan}</td>
       <td>
@@ -38,7 +40,7 @@ export async function renderUsers() {
   });
 }
 
-// ----------- ANALÍTICA: Cargar datos de usuario y tests -----------
+//  ANALÍTICA: Cargar datos de usuario y tests
 export async function cargarAnalitica() {
   const params = new URLSearchParams(window.location.search);
   const id_user = params.get('id');
@@ -82,6 +84,31 @@ export async function cargarAnalitica() {
   // document.querySelector("#nombre-usuario").textContent = user.name;
   // document.querySelector("#valor-stroop").textContent = stroop.P;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Botones y modal
+  const addUserBtn = document.getElementById('addUserBtn');
+  const modal = document.getElementById('addUserModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+
+  // Abrir modal
+  addUserBtn?.addEventListener('click', () => {
+    modal.classList.add('show');
+  });
+
+  // Cerrar modal
+  closeModalBtn?.addEventListener('click', () => {
+    modal.classList.remove('show');
+  });
+
+  // Cerrar modal si se hace clic fuera del contenido hay que hacerle fetch
+  window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      modal.classList.remove('show');
+    }
+  });
+});
+
 
 // ----------- Inicialización según la página -----------
 document.addEventListener("DOMContentLoaded", () => {

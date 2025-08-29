@@ -44,8 +44,10 @@
   <main class="main">
     <header class="header">
       <h1>Gestión de Usuarios</h1>
-      <p>Administra BeLabs</p>
-      <button class="btn-action" id="logoutBtn">Cerrar sesión</button>
+      <div>
+        <button class="btn-action btn-add" id="addUserBtn">Añadir Usuario</button>
+        <button class="btn-action" id="logoutBtn">Cerrar sesión</button>
+      </div>
     </header>
 
 <section class="card">
@@ -54,7 +56,9 @@
           <tr>
             <th>documento</th>
             <th>nombre</th>
-            <th>apellidos</th>
+            <th>segundo nombre</th>
+            <th>apellido</th>
+            <th>segundo apellido</th>
             <th>ciudad</th>
             <th>clan</th>
             <th>analizar</th>
@@ -67,6 +71,49 @@
     </section>
   
   </main>
+
+  <!-- Modal para Añadir Usuario -->
+  <div id="addUserModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Añadir Nuevo Usuario</h2>
+        <span class="close-button" id="closeModalBtn">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="addUserForm">
+          <div class="form-group">
+            <label for="documento">Documento</label>
+            <input type="text" id="documento" name="documento" required>
+          </div>
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="segundo_nombre">Segundo Nombre</label>
+            <input type="text" id="segundo_nombre" name="segundo_nombre">
+          </div>
+          <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" name="apellido" required>
+          </div>
+          <div class="form-group">
+            <label for="segundo_apellido">Segundo Apellido</label>
+            <input type="text" id="segundo_apellido" name="segundo_apellido">
+          </div>
+          <div class="form-group">
+            <label for="ciudad">Ciudad</label>
+            <input type="text" id="ciudad" name="ciudad" required>
+          </div>
+          <div class="form-group">
+            <label for="clan">Clan</label>
+            <input type="text" id="clan" name="clan" required>
+          </div>
+          <button type="submit" class="btn-action">Guardar Usuario</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script>
     // esperamos DOM
