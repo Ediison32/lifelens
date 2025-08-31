@@ -19,76 +19,117 @@
 
 
     <div class="contenedor">
-
-        <!-- Tabla Stroop -->
-        <div class="card">
-            <h3>Escala Stroop</h3>
-            <table>
-                <tr><th>Respuestas</th><th>Valor</th></tr>
-                <tr><td>P</td><td>1.1</td></tr>
-                <tr><td>C</td><td>1.2</td></tr>
-                <tr><td>PC</td><td>1.3</td></tr>
-                <tr><td>PC/PC+C=PC*</td><td>0.57</td></tr>
-                <tr><td>PC-PC* Interferencia</td><td>0.72</td></tr>
-                <tr><td>Tiempo</td><td>60</td></tr>
-                <tr><td>Escala</td><td>Muy bajo</td></tr>
-            </table>
-        </div>
-
-        <!-- Tabla Go NoGo -->
-        <div class="card">
-            <h3>Tareas Go NoGo</h3>
-            <table>
-                <tr><th>Tarea</th><th>Tiempo</th><th>Respuestas</th><th>Puntuación</th></tr>
-                <tr><td>Tarea 1</td><td>40</td><td>50</td><td>1.25</td></tr>
-                <tr><td>Tarea 2</td><td>45</td><td>30</td><td>0.87</td></tr>
-                <tr><td>Tarea 3</td><td>45</td><td>20</td><td>0.44</td></tr>
-                <tr><td>Total</td><td colspan="3">33.3</td></tr>
-                <tr><td>Escala</td><td colspan="3">Medio</td></tr>
-            </table>
-        </div>
-
-        <!-- Tabla Torre Hanoi -->
-        <div class="card">
-            <h3>Torre de Hanoi</h3>
-            <table>
-                <tr><th>Parámetro</th><th>Valor</th></tr>
-                <tr><td>Número de Piezas</td><td>6</td></tr>
-                <tr><td>Piezas en otro lateral</td><td>5</td></tr>
-                <tr><td>Tiempo</td><td>46</td></tr>
-                <tr><td>Total Calificación</td><td>5.0</td></tr>
-            </table>
-        </div>
-
-        <!-- Tabla Trail Making Test -->
-        <div class="card">
-            <h3>Trail Making Test</h3>
-            <table>
-                <tr><td>Aciertos Tarea A</td><td>25</td></tr>
-                <tr><td>Tiempo Tarea A</td><td>30.2</td></tr>
-                <tr><td>Puntaje Tarea A</td><td>0.83</td></tr>
-                <tr><td>Aciertos Tarea B</td><td>24</td></tr>
-                <tr><td>Tiempo Tarea B</td><td>65</td></tr>
-                <tr><td>Puntaje Tarea B</td><td>0.49</td></tr>
-                <tr><td>Total Aciertos</td><td>49</td></tr>
-                <tr><td>Total Prueba</td><td>1.2</td></tr>
-            </table>
-        </div>
-
-        <!-- Tabla de Resultados finales -->
-        <div class="card">
-            <h3>Resultados</h3>
-            <table>
-                <tr><td>Control inhibitorio</td><td>0.85</td></tr>
-                <tr><td>Funcionamiento ejecutivo</td><td>5.1</td></tr>
-                <tr><td>Memoria de trabajo</td><td>0.85</td></tr>
-                <tr><td>Flexibilidad Cognitiva</td><td>5.8</td></tr>
-                <tr><td>Planificación</td><td>6.2</td></tr>
-                <tr><td>Aprendizaje Estratégico</td><td>6.0</td></tr>
-                <tr><td>Velocidad de procesamiento</td><td>8.2</td></tr>
-            </table>
-        </div>
+    <!-- Tabla Stroop -->
+    <div class="card">
+        <h3>Escala Stroop</h3>
+        <table>
+            <tr><th>Respuestas</th><th>Valor</th></tr>
+            <tr><td>P</td><td id="stroop-p">-</td></tr>
+            <tr><td>C</td><td id="stroop-c">-</td></tr>
+            <tr><td>PC</td><td id="stroop-pc">-</td></tr>
+            <tr><td>PC/PC+C=PC*</td><td id="stroop-pc-ratio">-</td></tr>
+            <tr><td>PC-PC* Interferencia</td><td id="stroop-interference">-</td></tr>
+            <tr><td>Tiempo</td><td id="stroop-time">-</td></tr>
+            <tr><td>Tiempo tarea P</td><td id="stroop-time-p">-</td></tr>
+            <tr><td>Tiempo tarea C</td><td id="stroop-time-c">-</td></tr>
+            <tr><td>Tiempo tarea PC</td><td id="stroop-time-pc">-</td></tr>
+            <tr><td>Total Stroop</td><td id="stroop-total">-</td></tr>
+            <tr><td>Escala</td><td id="stroop-scale">-</td></tr>
+        </table>
     </div>
+
+    <!-- Tabla Go NoGo -->
+    <div class="card">
+        <h3>Tareas Go NoGo</h3>
+        <table>
+            <tr><th>Tarea</th><th>Tiempo</th><th>Respuestas</th><th>Puntuación</th></tr>
+            <tr>
+                <td>Tarea 1</td>
+                <td id="gonogo-time-1">-</td>
+                <td id="gonogo-answers-1">-</td>
+                <td id="gonogo-score-1">-</td>
+            </tr>
+            <tr>
+                <td>Tarea 2</td>
+                <td id="gonogo-time-2">-</td>
+                <td id="gonogo-answers-2">-</td>
+                <td id="gonogo-score-2">-</td>
+            </tr>
+            <tr>
+                <td>Tarea 3</td>
+                <td id="gonogo-time-3">-</td>
+                <td id="gonogo-answers-3">-</td>
+                <td id="gonogo-score-3">-</td>
+            </tr>
+            <tr>
+                <td>Total tareas</td>
+                <td colspan="3" id="gonogo-total-tareas">-</td>
+            </tr>
+            <tr>
+                <td>Interferencia</td>
+                <td colspan="3" id="gonogo-interferencia">-</td>
+            </tr>
+        
+
+            <tr>
+                <td>Total GO NoGo</td>
+                <td colspan="2" id="gonogo-respuestas">-</td>
+                <td id="gonogo-total">-</td>
+                    
+                
+            </tr>
+        
+            <tr>
+
+                <td>Escala</td>
+                <td colspan="3" id="gonogo-scale">-</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Tabla Torre Hanoi -->
+    <div class="card">
+        <h3>Torre de Hanoi</h3>
+        <table>
+            <tr><th>Parámetro</th><th>Valor</th></tr>
+            <tr><td>Número de Piezas</td><td id="hanoi-pieces">-</td></tr>
+            <tr><td>Piezas en otro lateral</td><td id="hanoi-pieces-side">-</td></tr>
+            <tr><td>Tiempo</td><td id="hanoi-time">-</td></tr>
+            <tr><td>Calif Mov</td><td id="hanoi-move">-</td></tr>
+            <tr><td>Calif Tiempo</td><td id="hanoi-cal-time">-</td></tr>
+            <tr><td>Total Calificación</td><td id="hanoi-total">-</td></tr>
+        </table>
+    </div>
+
+    <!-- Tabla Trail Making Test -->
+    <div class="card">
+        <h3>Trail Making Test</h3>
+        <table>
+            <tr><td>Aciertos Tarea A</td><td id="trail-correct-a">-</td></tr>
+            <tr><td>Tiempo Tarea A</td><td id="trail-time-a">-</td></tr>
+            <tr><td>Puntaje Tarea A</td><td id="trail-score-a">-</td></tr>
+            <tr><td>Aciertos Tarea B</td><td id="trail-correct-b">-</td></tr>
+            <tr><td>Tiempo Tarea B</td><td id="trail-time-b">-</td></tr>
+            <tr><td>Puntaje Tarea B</td><td id="trail-score-b">-</td></tr>
+            <tr><td>Total Aciertos</td><td id="trail-total-correct">-</td></tr>
+            <tr><td>Total Prueba</td><td id="trail-total">-</td></tr>
+        </table>
+    </div>
+
+    <!-- Tabla de Resultados finales -->
+    <div class="card">
+        <h3>Resultados</h3>
+        <table>
+            <tr><td>Control inhibitorio</td><td id="result-inhibitory">-</td></tr>
+            <tr><td>Funcionamiento ejecutivo</td><td id="result-executive">-</td></tr>
+            <tr><td>Memoria de trabajo</td><td id="result-memory">-</td></tr>
+            <tr><td>Flexibilidad Cognitiva</td><td id="result-flexibility">-</td></tr>
+            <tr><td>Planificación</td><td id="result-planning">-</td></tr>
+            <tr><td>Aprendizaje Estratégico</td><td id="result-learning">-</td></tr>
+            <tr><td>Velocidad de procesamiento</td><td id="result-speed">-</td></tr>
+        </table>
+    </div>
+</div>
 
     <!-- Gráfica -->
     <div class="grafica">

@@ -1,151 +1,156 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>BeLabs - Gestión de Usuarios</title>
+    <link rel="stylesheet" href="admin.css" />
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BeLabs - Gestión de Usuarios</title>
-   <link rel="stylesheet" href="admin.css">
+    <!-- GUARD: esto se ejecuta inmediatamente -->
+    <script>
+      (function guard() {
+        try {
+          const data = localStorage.getItem("belabs_auth");
 
-  <!-- GUARD: esto se ejecuta inmediatamente -->
-  <script>
-    (function guard() {
-      try {
-        const data = localStorage.getItem('belabs_auth');
+          if (!data) throw new Error("No auth data");
 
-        if (!data) throw new Error('No auth data');
+          // if (!data || data.role !== 'admin') {
+          //   console.warn('No auth -> redirect to login');
+          //   window.location.replace('login.html');
+          // }
+        } catch (err) {
+          console.error(err);
+          window.location.replace("login.html");
+        }
+      })();
+    </script>
+  </head>
 
-        // if (!data || data.role !== 'admin') {
-        //   console.warn('No auth -> redirect to login');
-        //   window.location.replace('login.html');
-        // }
-      } catch (err) {
-        console.error(err);
-        window.location.replace('login.html');
-      }
-    })();
-  </script>
-
-</head>
-
-<body>
-
-  <aside class="sidebar">
-    <h2 class="logo">&lt;BeLabs&gt;</h2>
-    <div class="user-profile">
-      <img src="https://avatar.iran.liara.run/public/38" alt="Foto de perfil" id="profilePicture" class="user-profile__picture">
-      <p id="userEmail" class="user-profile__email"></p>
-    </div>
-    <ul class="menu">
-      <li><a href="#"><span></span> Panel de Control</a></li>
-    </ul>
-  </aside>
-
-  <main class="main">
-    <header class="header">
-      <h1>Gestión de Usuarios</h1>
-      <div>
-        <button class="btn-action btn-add" id="addUserBtn">Añadir Usuario</button>
-        <button class="btn-action" id="logoutBtn">Cerrar sesión</button>
+  <body>
+    <aside class="sidebar">
+      <h2 class="logo">&lt;BeLabs&gt;</h2>
+      <div class="user-profile">
+        <img
+          src="https://avatar.iran.liara.run/public/38"
+          alt="Foto de perfil"
+          id="profilePicture"
+          class="user-profile__picture"
+        />
+        <p id="userEmail" class="user-profile__email"></p>
       </div>
-    </header>
+      <ul class="menu">
+        <li>
+          <a href="#"><span></span> Panel de Control</a>
+        </li>
+      </ul>
+    </aside>
 
-<section class="card">
-      <table>
-        <thead>
-          <tr>
-            <th>documento</th>
-            <th>nombre</th>
-            <th>segundo nombre</th>
-            <th>apellido</th>
-            <th>segundo apellido</th>
-            <th>ciudad</th>
-            <th>clan</th>
-            <th>analizar</th>
-          </tr>
-        </thead>
-        <tbody id="usersTableBody">
-          <!-- Los usuarios se renderizan aquí dinámicamente -->
-        </tbody>
-      </table>
-    </section>
+    <main class="main">
+      <header class="header">
+        <h1>Gestión de Usuarios</h1>
+        <div>
+          <button class="btn-action btn-add" id="addUserBtn">
+            Añadir Usuario
+          </button>
+          <button class="btn-action" id="logoutBtn">Cerrar sesión</button>
+        </div>
+      </header>
+
+      <section class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>documento</th>
+              <th>nombre</th>
+              <th>segundo nombre</th>
+              <th>apellido</th>
+              <th>segundo apellido</th>
+              <th>ciudad</th>
+              <th>clan</th>
+              <th>analizar</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody">
+            <!-- Los usuarios se renderizan aquí dinámicamente -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <!-- Modal para Añadir Usuario -->
   
-  </main>
-
-  <!-- Modal para Añadir Usuario -->
-  <div id="addUserModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Añadir Nuevo Usuario</h2>
-        <span class="close-button" id="closeModalBtn">&times;</span>
-      </div>
-      <div class="modal-body">
-        <form id="addUserForm">
-          <div class="form-group">
-            <label for="documento">Documento</label>
-            <input type="text" id="documento" name="documento" required>
-          </div>
-          <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" required>
-          </div>
-          <div class="form-group">
-            <label for="segundo_nombre">Segundo Nombre</label>
-            <input type="text" id="segundo_nombre" name="segundo_nombre">
-          </div>
-          <div class="form-group">
-            <label for="apellido">Apellido</label>
-            <input type="text" id="apellido" name="apellido" required>
-          </div>
-          <div class="form-group">
-            <label for="segundo_apellido">Segundo Apellido</label>
-            <input type="text" id="segundo_apellido" name="segundo_apellido">
-          </div>
-          <div class="form-group">
-            <label for="ciudad">Ciudad</label>
-            <input type="text" id="ciudad" name="ciudad" required>
-          </div>
-          <div class="form-group">
-            <label for="clan">Clan</label>
-            <input type="text" id="clan" name="clan" required>
-          </div>
-          <button type="submit" class="btn-action">Guardar Usuario</button>
-        </form>
+    <div id="addUserModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Add New User</h2>
+          <span class="close-button" id="closeModalBtn">&times;</span>
+        </div>
+        <div class="modal-body">
+          <form id="addUserForm">
+            <div class="form-group">
+              <label for="document">Document</label>
+              <input type="text" id="document" name="document" required />
+            </div>
+            <div class="form-group">
+              <label for="name">First Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="name2">Second Name (optional)</label>
+              <input type="text" id="name2" name="name2" />
+            </div>
+            <div class="form-group">
+              <label for="last_name">Last Name</label>
+              <input type="text" id="last_name" name="last_name" required />
+            </div>
+            <div class="form-group">
+              <label for="last_name2">Second Last Name (optional)</label>
+              <input type="text" id="last_name2" name="last_name2" />
+            </div>
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" name="city" required />
+            </div>
+            <div class="form-group">
+              <label for="clan">Clan</label>
+              <input type="text" id="clan" name="clan" required />
+            </div>
+            <button type="submit" class="btn-action">Save User</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    // esperamos DOM
-    document.addEventListener('DOMContentLoaded', () => {
-      const btn = document.getElementById('logoutBtn');
-      btn?.addEventListener('click', () => {
-        localStorage.removeItem('belabs_auth');
-        window.location.replace('login.html');
+    <script>
+      // esperamos DOM
+      document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("logoutBtn");
+        btn?.addEventListener("click", () => {
+          localStorage.removeItem("belabs_auth");
+          window.location.replace("login.html");
+        });
+
+        try {
+          const authDataString = localStorage.getItem("belabs_auth");
+          if (!authDataString) throw new Error("No auth data");
+
+          const authData = JSON.parse(authDataString);
+
+          const emailElement = document.getElementById("userEmail");
+          const pictureElement = document.getElementById("profilePicture");
+
+          if (emailElement && authData.email) {
+            emailElement.textContent = authData.email;
+          }
+
+          if (pictureElement && authData.photoUrl) {
+            pictureElement.src = authData.photoUrl;
+          }
+        } catch (err) {
+          console.error("Error al cargar datos de usuario:", err);
+        }
       });
-
-      try {
-        const authDataString = localStorage.getItem('belabs_auth');
-        if (!authDataString) throw new Error('No auth data');
-
-        const authData = JSON.parse(authDataString);
-
-        const emailElement = document.getElementById('userEmail');
-        const pictureElement = document.getElementById('profilePicture');
-
-        if (emailElement && authData.email) {
-          emailElement.textContent = authData.email;
-        }
-
-        if (pictureElement && authData.photoUrl) {
-          pictureElement.src = authData.photoUrl;
-        }
-      } catch (err) {
-        console.error('Error al cargar datos de usuario:', err);
-      }
-    });
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
-<script src="./services/render.js" type="module" ></script>
+<script src="./services/render.js" type="module"></script>

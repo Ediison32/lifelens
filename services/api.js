@@ -21,8 +21,45 @@ export async function getFromTable(table = "", id = null) {
   }
 }
 
-// Ejemplo de uso:
-// const users = await getFromTable('user');
-// const user7 = await getFromTable('user', 7);
-// const gonogo = await getFromTable('gonogo');
-// const stroop = await getFromTable('stroop', 3);
+
+// funcion para elimianar 
+export async function deleteUser(id){
+  try {
+
+    let url = `${API_URL}/user`;
+    if (id !== null && id !== undefined) {
+      url += `/${id}`;
+    }
+    const response = await fetch(url,{
+      method: "DELETE",
+      headers: { 'Content-Type': 'application/json' }
+    });
+    if (!response.ok) {
+      throw new Error("Error en la petición");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(`Error al eliminar  ${table}:`, error);
+    return null;
+  }
+}
+
+
+// ---------- Llamada POST para crear usuario ----------
+export async function createUser(payload) {
+  try {
+    let url = `${API_URL}/user`;
+    const res = await fetch(url, {
+      method : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body   : JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Error al crear');
+    return data;          // { message: "Usuario creado..." }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}

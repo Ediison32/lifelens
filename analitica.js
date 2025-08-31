@@ -1,6 +1,18 @@
 import { cargarAnalitica } from "./services/render.js";
-cargarAnalitica();
+const restul = await cargarAnalitica();
 const ctx = document.getElementById('radarChart').getContext('2d');
+console.log("analitica grafica");
+
+console.log(restul);
+const {
+    Inhibitory_control,
+    executive_functioning,
+    working_memory,
+    cognitive_flexibility,
+    planning,
+    strategic_learning,
+    processing_speed
+} = restul;
 
 new Chart(ctx, {
     type: 'radar',
@@ -16,7 +28,13 @@ new Chart(ctx, {
         ],
         datasets: [{
             label: "Funciones Metacognitivas",
-            data: [0.85, 5.1, 0.85, 5.8, 6.2, 6.0, 8.2],
+            data: [Inhibitory_control,
+                    executive_functioning,
+                    working_memory,
+                    cognitive_flexibility,
+                    planning,
+                    strategic_learning,
+                    processing_speed],
             fill: true,
             backgroundColor: "rgba(106, 90, 205, 0.2)",
             borderColor: "rgba(106, 90, 205, 1)",
@@ -32,7 +50,7 @@ new Chart(ctx, {
             r: {
                 angleLines: { display: true },
                 suggestedMin: 0,
-                suggestedMax: 10
+                suggestedMax: 5
             }
         }
     }
