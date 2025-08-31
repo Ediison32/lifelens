@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "login.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/login.html"
+    }
+  ]
+}
