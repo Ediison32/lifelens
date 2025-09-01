@@ -574,12 +574,13 @@ export function initTMT() {
                 break;
             case 'Finalizar':
                 // Ocultar el área de la prueba y mostrar un mensaje final.
-                testContainer.classList.add('hidden');
-                mainTitle.textContent = '¡Has finalizado la prueba!';
+                window.location.href = '/logout';
+                // testContainer.classList.add('hidden');
+                // mainTitle.textContent = '¡Has finalizado la prueba!';
 
-                // Cambiar el botón a "Salir" para el siguiente paso.
-                resetButton.textContent = 'Salir';
-                resetButton.disabled = false;
+                // // Cambiar el botón a "Salir" para el siguiente paso.
+                // resetButton.textContent = 'Salir';
+                // resetButton.disabled = false;
                 break;
             case 'Salir':
                 // Llama a la función que envía los datos, limpia el storage y redirige.

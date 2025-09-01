@@ -1,41 +1,43 @@
 <section id="tower">
+    
+        <div id="instructions">
+            <h2 class="tower-title">Torre de Hanoi</h2>
 
-    <div id="instructions">
-        <h2 class="tower-title">Torre de Hanoi</h2>
-
-        <div id="towerInfo">
-            <h3 class="tower-subtitle">Instrucciones</h3>
-            <p class="tower-desc">
-                El objetivo de este test es mover todos los discos desde la Torre A (costado izquierdo) hasta la Torre C
-                (costado derecho), siguiendo estas reglas:
-            </p>
-            <ul class="tower-list">
-                <li>Solo puedes mover un disco a la vez.</li>
-                <li>Solo el disco superior de una torre se puede mover.</li>
-                <li>No puedes colocar un disco grande sobre uno pequeño.</li>
-            </ul>
-            <button id="startBtn" class="tower-btn">Comenzar juego</button>
-        </div>
-    </div>
-
-    <div id="game" hidden>
-        <div id="container">
-            <div id="a"></div>
-            <div id="b"></div>
-            <div id="c"></div>
+            <div id="towerInfo">
+                <h3 class="tower-subtitle">Instrucciones</h3>
+                <p class="tower-desc">
+                    El objetivo de este test es mover todos los discos desde la Torre A (costado izquierdo) hasta la
+                    Torre C
+                    (costado derecho), siguiendo estas reglas:
+                </p>
+                <ul class="tower-list">
+                    <li>1- Solo puedes mover un disco a la vez.</li>
+                    <li>2- Solo el disco superior de una torre se puede mover.</li>
+                    <li>3- No puedes colocar un disco grande sobre uno pequeño.</li>
+                </ul>
+                <button id="startBtn" class="tower-btn">Comenzar juego</button>
+            </div>
         </div>
 
-        <div id="output" hidden>
-            Moves: <span id="moves">0</span> <br>
-            Time left: <span id="timer">480</span> seconds <br>
-            Disks in C: <span id="inC">0</span>
-            <div style="color: black; font-size: 2em;"></div>
-        </div>
-    </div>
+        <div id="game" hidden>
+            <div id="container">
+                <div id="a"></div>
+                <div id="b"></div>
+                <div id="c"></div>
+            </div>
 
-    <div id="result" hidden>
-        <h2 class="tower-title">Fin del test</h2>
-        <p id="gameSummary"></p>
-        <button id="nextBtn" class="tower-btn" data-link href="/tmt">Siguiente test</button>
-    </div>
+            <div id="output" hidden>
+                Moves: <span id="moves">0</span> <br>
+                Time left: <span id="timer">480</span> seconds <br>
+                Disks in C: <span id="inC">0</span>
+                <div style="color: black; font-size: 2em;"></div>
+            </div>
+        </div>
+
+        <div id="result" hidden>
+            <h2 class="tower-title">Fin del test</h2>
+            <p id="gameSummary"></p>
+            <button id="nextBtn" class="tower-btn" data-link href="/tmt">Siguiente test</button>
+        </div>
+    
 </section>

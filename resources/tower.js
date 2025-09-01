@@ -41,7 +41,7 @@ function setupGame() {
     towers = { "a": ["disk_1", "disk_2", "disk_3", "disk_4", "disk_5", "disk_6", "disk_7"] };
     number_pieces = 7;
     moveCounter = 0;
-    timeLeft = 480;
+    timeLeft = 10;
     timerInterval = null;
     timerStarted = false;
 

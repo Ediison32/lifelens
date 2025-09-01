@@ -5,7 +5,8 @@ export function GoNoGoGame() {
     const STAGES = [
         {
             name: 'Palabras',
-            stimuli: ["No", "Otro", "Si", "Otro", "Otro", "Otro", "No", "Si"],
+            stimuli: ["Si","Nu","No","Se","Na","Ne","Si","No","Su","Sa","Ni","Si","Ne","Si","Su","No","Si","Su","Si","Si","No","Ni","Nu","Si","No","Si","Nu","No","Se","Na","Ne","Si","No","Su","Sa","Ni","Si","Ne","Si","Su","No","Si","Su","Si","Si","No","Ni","Nu","Si","No","No","Su","Sa","Ni","Si","Ne","Si","Su","No","Si","Su","Si","Nu","No","Se","Na","Ne","Si","No","Ne","Si","Su","No","Si","Su","Si","Si","No","Ni","Nu","Si","No","No","Su","Sa","Ni","Si","Ne","Si","Su","Ne","Si","Su","No","Si","Su","Si","Si","No","Ni"
+],
             getExpectedResponse: (s) => {
                 const normalized = s.trim().toUpperCase();
                 if (normalized === 'SI') return 'no';
@@ -20,7 +21,11 @@ export function GoNoGoGame() {
         },
         {
             name: 'Colores Invertidos',
-            stimuli: ["rojo", "otro", "azul", "otro", "azul", "rojo"],
+            stimuli: ["rojo", "otro", "azul", "otro", "azul", "rojo", "otro", "azul", "otro", "otro", "azul", "otro", "rojo", "otro", "azul", "azul", "rojo", "otro", "azul", "rojo",
+                "otro", "azul", "otro", "rojo", "otro", "rojo", "otro", "azul", "otro", "azul", "rojo", "otro", "azul", "otro", "otro", "azul", "otro", "rojo", "otro", "azul",
+                "otro", "rojo", "otro", "azul", "rojo", "otro", "azul", "otro", "rojo", "otro", "azul", "otro", "otro", "azul", "otro", "rojo", "otro", "otro", "azul", "rojo",
+                "otro", "azul", "rojo", "otro", "azul", "otro", "rojo", "otro", "rojo", "otro", "azul", "otro", "azul", "rojo", "otro", "azul", "otro", "otro", "azul", "otro",
+                "azul", "otro", "azul", "rojo", "otro", "azul", "otro", "otro", "azul", "otro", "rojo", "otro", "azul"],
             getExpectedResponse: (c) => {
                 const normalized = c.toLowerCase();
                 if (normalized === 'rojo') return 'azul';
@@ -39,7 +44,11 @@ export function GoNoGoGame() {
         },
         {
             name: 'Signos',
-            stimuli: ["/", "( )", ">", "%", "( )", "&"],
+            stimuli: ["/", "( )", ">", "%", "( )", "&", "( )", "/", "( )", "&", "/", "( )", "( )", "%", "/", "&", ">", "/", "%",
+                "/", "( )", "/", ">", "( )", "/", ">", "%", "( )", "&", "( )", "/", ">", "( )", "&", "/", ">", "( )", "( )", "%",
+                "/", "&", ">", "/", "%", "/", "( )", "/", "&", "( )", "/", "( )", "&", "%", "( )", "&", "( )", "/", "&", "( )",
+                "&", "/", "( )", "( )", "%", "/", "&", ">", "/", "%", "/", "( )", "/", "&", "( )", "/", "( )", "&", ">", "/", "%",
+                "/", "( )", "/", "( )", "&", "( )", "/", "( )", "&", "/", "( )", "( )", "%", "/", "&", ">", "/", "%"],
             getExpectedResponse: (s) => {
                 if (s === '/') return '>';
                 if (s === '>') return '/';

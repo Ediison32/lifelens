@@ -65,7 +65,7 @@ export function initStroop() {
     let time_homework_pc = 0;
 
     let time = 0; // Variable para almacenar el tiempo total en segundos
-    let climb = "Prueba";
+    let climb = "";
 
     // DOM
     const startBtn = document.getElementById('stroop-start-btn');
@@ -78,13 +78,18 @@ export function initStroop() {
     const resultDiv = document.getElementById('stroop-result');
     const timerDiv = document.getElementById('stroop-timer');
     const taskCounter = document.getElementById('stroop-task-counter');
+    const stroopTitle = document.getElementById('stroop-title');
+    const stroopIntro = document.getElementById('stroop-intro');
 
 
     // Iniciar test
 
     startBtn.addEventListener('click', () => {
         loadState();
+
         startBtn.classList.add('hidden');
+        stroopIntro.classList.add('hidden');
+        stroopTitle.classList.remove('hidden');
         testDiv.classList.remove('hidden');
         showInstructions();
         saveState();
@@ -270,7 +275,7 @@ export function initStroop() {
 
         //fin del test
         let detalle = `
-    <h2>test completado</h2>
+    <h2>Test completado</h2>
     <button id="stroop-next-test-btn">
     <a href="/gonogo" id="stroop-next-test-link">Siguiente test</a>
     </button>
