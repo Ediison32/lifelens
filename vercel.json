@@ -1,13 +1,10 @@
 {
-  "name": "lifelens",
-  "version": "1.0.0",
-  "description": "Proyecto integrador Riwi - LifeLens",
-  "scripts": {
-    "dev": "vercel dev",
-    "build": "",
-    "start": ""
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT"
+  "rewrites": [
+    { "source": "/gonogo", "destination": "/views/gonogo.html" },
+    { "source": "/login", "destination": "/views/login.html" },
+    { "source": "/logout", "destination": "/views/logout.html" },
+    { "source": "/stroop", "destination": "/views/stroop.html" },
+    { "source": "/tmt", "destination": "/views/tmt.html" },
+    { "source": "/tower", "destination": "/views/tower.html" }
+  ]
 }
