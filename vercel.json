@@ -1,0 +1,13 @@
+{
+  "name": "lifelens",
+  "version": "1.0.0",
+  "description": "Proyecto integrador Riwi - LifeLens",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "",
+    "start": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}

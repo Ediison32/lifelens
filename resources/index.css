@@ -100,3 +100,18 @@ header p {
   cursor: not-allowed !important;
 }
 
+
+
+/*  estilos ia  */
+
+.ai-response {
+  margin-top: 15px;
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: left;
+  color: #333;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+  min-height: 50px;
+}
