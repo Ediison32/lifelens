@@ -3,6 +3,8 @@ export async function updateTestResults() {
     let all_result; 
     // traigo todo lo del local Storage
     const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user.name);
+    
     const gonogo = JSON.parse(localStorage.getItem("gonogo_final"));
     const stroop = JSON.parse(localStorage.getItem("stroop_state"));
     const hanoi = JSON.parse(localStorage.getItem("towerGameData"));
@@ -11,6 +13,8 @@ export async function updateTestResults() {
     all_result ={
         gonogo, stroop, hanoi, tmtHistory
     }
+    console.log(all_result);
+    
     const status = obtenerRetroalimentacion(user.name, all_result)
 
     if(status){
@@ -144,9 +148,11 @@ async function obtenerRetroalimentacion(usuario, resultados) {
         });
 
         const data = await response.json();
+        console.log(data.choices[0].message.content);
+        let response_ia = data.choices[0].message.content;
         // Mostrar respuesta en consola y en el div
         const respuestaDiv = document.getElementById("feedback");
-        respuestaDiv.innerText = data.respuesta;
+        respuestaDiv.innerText = response_ia;
     } catch (error) {
         console.error("Error al obtener retroalimentación:", error);
     }
