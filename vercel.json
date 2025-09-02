@@ -1,10 +1,5 @@
 {
   "rewrites": [
-    { "source": "/gonogo", "destination": "/views/gonogo.html" },
-    { "source": "/login", "destination": "/views/login.html" },
-    { "source": "/logout", "destination": "/views/logout.html" },
-    { "source": "/stroop", "destination": "/views/stroop.html" },
-    { "source": "/tmt", "destination": "/views/tmt.html" },
-    { "source": "/tower", "destination": "/views/tower.html" }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
