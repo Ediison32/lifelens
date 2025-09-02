@@ -1,7 +1,24 @@
 export async function updateTestResults() {
+    
+    let all_result; 
+    // traigo todo lo del local Storage
+    const user = JSON.parse(localStorage.getItem("user"));
+    const gonogo = JSON.parse(localStorage.getItem("gonogo_final"));
+    const stroop = JSON.parse(localStorage.getItem("stroop_state"));
+    const hanoi = JSON.parse(localStorage.getItem("towerGameData"));
+    const tmtHistory = JSON.parse(localStorage.getItem("tmtHistory"));
     const btnEnd = document.getElementById("btn-end");
+    all_result ={
+        gonogo, stroop, hanoi, tmtHistory
+    }
+    const status = obtenerRetroalimentacion(user.name, all_result)
+
+    if(status){
+        btnEnd.classList.remove('hidden');
+    }
+
     btnEnd.addEventListener("click", async () => {
-        const user = JSON.parse(localStorage.getItem("user"));
+        
 
         if (!user) {
             return;
@@ -10,7 +27,7 @@ export async function updateTestResults() {
         try {
 
             // === Gonogo ===
-            const gonogo = JSON.parse(localStorage.getItem("gonogo_final"));
+            
             if (gonogo) {
                 await fetch(`https://lifelens-db.vercel.app/gonogo/${user.id_gonogo}`, {
                     method: "PUT",
@@ -35,7 +52,7 @@ export async function updateTestResults() {
             }
 
             // === Stroop ===
-            const stroop = JSON.parse(localStorage.getItem("stroop_state"));
+            
             if (stroop) {
                 await fetch(`https://lifelens-db.vercel.app/stroop/${user.id_stroop}`, {
                     method: "PUT",
@@ -57,7 +74,7 @@ export async function updateTestResults() {
             }
 
             // === Torre de Hanói ===
-            const hanoi = JSON.parse(localStorage.getItem("towerGameData"));
+            
             if (hanoi) {
                 await fetch(`https://lifelens-db.vercel.app/t_hanoi/${user.id_t_hanoi}`, {
                     method: "PUT",
@@ -74,7 +91,7 @@ export async function updateTestResults() {
             }
 
             // === Trail Making ===
-            const tmtHistory = JSON.parse(localStorage.getItem("tmtHistory"));
+            
             if (tmtHistory && tmtHistory.length > 0) {
                 const last = tmtHistory[tmtHistory.length - 1]; // último intento
                 await fetch(`https://lifelens-db.vercel.app/trail_making/${user.id_trail_making}`, {
@@ -92,6 +109,7 @@ export async function updateTestResults() {
                     })
                 });
             }
+            
             localStorage.removeItem("gonogo_final");
             localStorage.removeItem("stroop_state");
             localStorage.removeItem("towerGameData");
@@ -110,3 +128,26 @@ export async function updateTestResults() {
 }
 
 
+
+// .................................. ia 
+
+
+// const sectionLogout = document.getElementById("logout");
+async function obtenerRetroalimentacion(usuario, resultados) {
+    try {
+        const response = await fetch(`https://lifelens-db.vercel.app/api/chat/${usuario}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ usuario, resultados }),
+        });
+
+        const data = await response.json();
+        // Mostrar respuesta en consola y en el div
+        const respuestaDiv = document.getElementById("feedback");
+        respuestaDiv.innerText = data.respuesta;
+    } catch (error) {
+        console.error("Error al obtener retroalimentación:", error);
+    }
+    }
