@@ -2,12 +2,11 @@ export function initStroop() {
     // Puedes agregar lógica de inicialización aquí si es necesario
 
     // VARIABLES
-    const colors = ["ROJO", "AZUL", "VERDE", "AMARILLO"];
+    const colors = ["ROJO", "AZUL", "VERDE"];
     const colorCodes = {
         ROJO: "red",
         AZUL: "blue",
-        VERDE: "green",
-        AMARILLO: "orange"
+        VERDE: "green"
     };
 
     // TODAS LAS RESPUESTAS (100 elementos por tarea)
@@ -129,26 +128,42 @@ export function initStroop() {
         saveState();
     });
 
-    // Cronómetro ya no se muestra en pantalla, pero sigue contando internamente
-    function startTimer() {
-        // Si timeLeft ya tiene un valor (restaurado), úsalo; si no, ponlo en 45 para el localstorage
-        if (typeof timeLeft !== "number" || timeLeft > 45 || timeLeft <= 0) {
-            timeLeft = 45;
-        }
-        timer = setInterval(() => {
-            timeLeft--;
-            saveState(); // Guarda el tiempo restante en cada tick
-            if (timeLeft <= 0) {
-                if (currentTask === 0) time_homework_p = 45;
-                if (currentTask === 1) time_homework_c = 45;
-                if (currentTask === 2) time_homework_pc = 45;
-                time += 45;
-                clearInterval(timer);
-                saveState();
-                nextTask();
-            }
-        }, 1000);
+    // Guardar resultados de la tarea actual
+    function saveTaskResult() {
+    if (currentTask === 0) {
+        p = scoresPorTarea[0];
+        time_homework_p = 45 - timeLeft;
     }
+    if (currentTask === 1) {
+        c = scoresPorTarea[1];
+        time_homework_c = 45 - timeLeft;
+    }
+    if (currentTask === 2) {
+        pc = scoresPorTarea[2];
+        time_homework_pc = 45 - timeLeft;
+    }
+    }
+
+
+    function startTimer() {
+    if (typeof timeLeft !== "number" || timeLeft > 45 || timeLeft <= 0) {
+        timeLeft = 45;
+    }
+    timer = setInterval(() => {
+        timeLeft--;
+        saveState();
+        if (timeLeft <= 0) {
+            saveTaskResult(); // <-- guarda los puntajes y tiempos
+            time += 45;
+            clearInterval(timer);
+            saveState();
+            nextTask();
+        }
+    }, 1000);
+}
+
+    
+
 
     // Cargar tarea
     function loadTask() {
@@ -161,72 +176,68 @@ export function initStroop() {
         nextTrial();
     }
 
-    // Mostrar estímulos
     function nextTrial() {
-        let totalTrials = respuestas.tarea1.length; // 100
-        if (currentTrial >= totalTrials) {
-            // Al terminar la tarea, guarda el resultado en la variable correspondiente
-            if (currentTask === 0) p = scoresPorTarea[0];
-            if (currentTask === 1) c = scoresPorTarea[1];
-            if (currentTask === 2) pc = scoresPorTarea[2];
-            saveState();
-            nextTask();
-            return;
-        }
-        optionsDiv.innerHTML = "";
-        let correctAnswer = "";
-
-        stimulusDiv.classList.remove('hidden');
-
-        if (tasks[currentTask].type === "word") {
-            correctAnswer = respuestas.tarea1[currentTrial];
-            stimulusDiv.textContent = correctAnswer;
-            stimulusDiv.style.color = "black";
-        } else if (tasks[currentTask].type === "colorXXXX") {
-            correctAnswer = respuestas.tarea2[currentTrial];
-            stimulusDiv.textContent = "XXXX";
-            stimulusDiv.style.color = colorCodes[correctAnswer];
-        } else if (tasks[currentTask].type === "colorWord") {
-            correctAnswer = respuestas.tarea3[currentTrial];
-            let randomWord;
-            do {
-                randomWord = colors[Math.floor(Math.random() * colors.length)];
-            } while (randomWord === correctAnswer); // aseguramos que NO coincidan
-            stimulusDiv.textContent = randomWord;
-            stimulusDiv.style.color = colorCodes[correctAnswer];
-        }
-
-        colors.forEach(color => {
-            const btn = document.createElement('button');
-            btn.textContent = color;
-            btn.onclick = () => {
-                if (btn.textContent === correctAnswer) {
-                    score++;
-                    scoresPorTarea[currentTask]++;
-                }
-                currentTrial++;
-                saveState();
-                nextTrial();
-            };
-            optionsDiv.appendChild(btn);
-        });
-    }
-
-    // Siguiente tarea
-    function nextTask() {
-        clearInterval(timer);
-        // Guarda el tiempo usado en esta tarea (45 - timeLeft)
-        let usedTime = 45 - timeLeft;
-        if (currentTask === 0) time_homework_p = usedTime;
-        if (currentTask === 1) time_homework_c = usedTime;
-        if (currentTask === 2) time_homework_pc = usedTime;
-        time += usedTime;
-        timeLeft = 45; // Reinicia el tiempo para la siguiente tarea
-        currentTask++;
+    let totalTrials = respuestas.tarea1.length; // 100
+    if (currentTrial >= totalTrials) {
+        saveTaskResult(); // <-- guarda resultados aunque termine por trials
         saveState();
-        showInstructions();
+        nextTask();
+        return;
     }
 
+    optionsDiv.innerHTML = "";
+    let correctAnswer = "";
+
+    stimulusDiv.classList.remove('hidden');
+
+    if (tasks[currentTask].type === "word") {
+        correctAnswer = respuestas.tarea1[currentTrial];
+        stimulusDiv.textContent = correctAnswer;
+        stimulusDiv.style.color = "black";
+    } else if (tasks[currentTask].type === "colorXXXX") {
+        correctAnswer = respuestas.tarea2[currentTrial];
+        stimulusDiv.textContent = "XXXX";
+        stimulusDiv.style.color = colorCodes[correctAnswer];
+    } else if (tasks[currentTask].type === "colorWord") {
+        correctAnswer = respuestas.tarea3[currentTrial];
+        let randomWord;
+        do {
+            randomWord = colors[Math.floor(Math.random() * colors.length)];
+        } while (randomWord === correctAnswer);
+        stimulusDiv.textContent = randomWord;
+        stimulusDiv.style.color = colorCodes[correctAnswer];
+    }
+
+    colors.forEach(color => {
+        const btn = document.createElement('button');
+        btn.textContent = color;
+        btn.onclick = () => {
+            if (btn.textContent === correctAnswer) {
+                score++;
+                scoresPorTarea[currentTask]++;
+            }
+            currentTrial++;
+            saveState();
+            nextTrial();
+        };
+        optionsDiv.appendChild(btn);
+    });
+}
+
+
+   function nextTask() {
+    clearInterval(timer);
+
+    // sumar tiempo usado de esta tarea
+    let usedTime = 45 - timeLeft;
+    if (usedTime < 0) usedTime = 45; // seguridad
+    time += usedTime;
+
+    timeLeft = 45; // Reinicia el tiempo para la siguiente tarea
+    currentTask++;
+    saveState();
+    showInstructions();
+}
 
     // Variable para almacenar el resultado de la ecuación total_stroop
     let total_stroop = 0;
@@ -245,6 +256,7 @@ export function initStroop() {
     }
 
     function showResult() {
+
         testDiv.classList.add('hidden');
         resultDiv.classList.remove('hidden');
 
@@ -252,18 +264,18 @@ export function initStroop() {
         p = scoresPorTarea[0];
         c = scoresPorTarea[1];
         pc = scoresPorTarea[2];
-
-        // Calcula P_C solo si P + C no es 0 para evitar división por cero
+        
+        //Calcula P_C solo si P + C no es 0 para evitar división por cero
         if ((p + c) !== 0) {
-            P_C = (p * c) / (p + c);
+           P_C = (p * c) / (p + c);
         } else {
             P_C = 0;
         }
 
         // calcular la interferencia
         Interference = pc - P_C;
-
-        // Calcula total_stroop solo si time no es 0 para evitar división por cero
+        
+        //Calcula total_stroop solo si time no es 0 para evitar división por cero
         if (time !== 0) {
             total_stroop = (p + c + pc) / time;
         } else {
@@ -291,8 +303,20 @@ export function initStroop() {
         // }
     }
 
-    // Guardar estado en localStorage
+    function computeAggregates() {
+    p  = scoresPorTarea[0];
+    c  = scoresPorTarea[1];
+    pc = scoresPorTarea[2];
+
+    P_C = (p + c) ? (p * c) / (p + c) : 0;
+    Interference = pc - P_C;
+    total_stroop = time ? (p + c + pc) / time : 0;
+    climb = climbs(total_stroop);
+}
+
+
     function saveState() {
+        computeAggregates();
         const state = {
             currentTask,
             currentTrial,
