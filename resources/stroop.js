@@ -1,5 +1,4 @@
 export function initStroop() {
-    // Puedes agregar lógica de inicialización aquí si es necesario
 
     // VARIABLES
     const colors = ["ROJO", "AZUL", "VERDE"];

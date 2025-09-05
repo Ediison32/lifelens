@@ -1,106 +1,110 @@
+// Export the main function for the Go/No-Go game
 export function GoNoGoGame() {
+    // Get the container element for the game
     const container = document.getElementById('GoNoGo-section');
+    // Set the duration for each stage in milliseconds
     const STAGE_DURATION_MS = 45000;
+    // Set the maximum number of responses per stage
     const MAX_RESPONSE = 100;
     const STAGES = [
         {
-            name: 'Palabras',
+            name: 'Palabras', // Stage name: Words
             stimuli: ["Si","Nu","No","Se","Na","Ne","Si","No","Su","Sa","Ni","Si","Ne","Si","Su","No","Si","Su","Si","Si","No","Ni","Nu","Si","No","Si","Nu","No","Se","Na","Ne","Si","No","Su","Sa","Ni","Si","Ne","Si","Su","No","Si","Su","Si","Si","No","Ni","Nu","Si","No","No","Su","Sa","Ni","Si","Ne","Si","Su","No","Si","Su","Si","Nu","No","Se","Na","Ne","Si","No","Ne","Si","Su","No","Si","Su","Si","Si","No","Ni","Nu","Si","No","No","Su","Sa","Ni","Si","Ne","Si","Su","Ne","Si","Su","No","Si","Su","Si","Si","No","Ni"
-],
-            getExpectedResponse: (s) => {
+], // The stimuli for this stage
+            getExpectedResponse: (s) => { // Function to get the expected response
                 const normalized = s.trim().toUpperCase();
                 if (normalized === 'SI') return 'no';
-                if (normalized === 'NO') return 'si';
-                return 'otro';
+                if (normalized === 'NO') return 'si'; 
+                return 'otro'; // 
             },
-            renderStimulus: (s, el) => {
+            renderStimulus: (s, el) => { // Function to render the stimulus
                 el.textContent = s;
                 el.classList.add('stimulus-text');
             },
-            instructions: `Marca "NO" cuando veas "SI", "SÍ" cuando veas "NO" y "OTRO" con cualquier otra sílaba.`
+            instructions: `Marca "NO" cuando veas "SI", "SÍ" cuando veas "NO" y "OTRO" con cualquier otra sílaba.` // Instructions for this stage
         },
         {
-            name: 'Colores Invertidos',
+            name: 'Colores Invertidos', // Stage name: Inverted Colors
             stimuli: ["rojo", "otro", "azul", "otro", "azul", "rojo", "otro", "azul", "otro", "otro", "azul", "otro", "rojo", "otro", "azul", "azul", "rojo", "otro", "azul", "rojo",
                 "otro", "azul", "otro", "rojo", "otro", "rojo", "otro", "azul", "otro", "azul", "rojo", "otro", "azul", "otro", "otro", "azul", "otro", "rojo", "otro", "azul",
                 "otro", "rojo", "otro", "azul", "rojo", "otro", "azul", "otro", "rojo", "otro", "azul", "otro", "otro", "azul", "otro", "rojo", "otro", "otro", "azul", "rojo",
                 "otro", "azul", "rojo", "otro", "azul", "otro", "rojo", "otro", "rojo", "otro", "azul", "otro", "azul", "rojo", "otro", "azul", "otro", "otro", "azul", "otro",
-                "azul", "otro", "azul", "rojo", "otro", "azul", "otro", "otro", "azul", "otro", "rojo", "otro", "azul"],
-            getExpectedResponse: (c) => {
+                "azul", "otro", "azul", "rojo", "otro", "azul", "otro", "otro", "azul", "otro", "rojo", "otro", "azul"], // The stimuli for this stage
+            getExpectedResponse: (c) => { // Function to get the expected response
                 const normalized = c.toLowerCase();
-                if (normalized === 'rojo') return 'azul';
-                if (normalized === 'azul') return 'rojo';
-                return 'otro';
+                if (normalized === 'rojo') return 'azul'; 
+                if (normalized === 'azul') return 'rojo'; 
+                return 'otro'; 
             },
-            renderStimulus: (c, el) => {
+            renderStimulus: (c, el) => { // Function to render the stimulus
                 el.textContent = '';
                 let displayColor = c;
                 if (c === 'otro') {
-                    displayColor = Math.random() < 0.5 ? 'amarillo' : 'verde';
+                    displayColor = Math.random() < 0.5 ? 'amarillo' : 'verde'; // If stimulus is "otro", display yellow or green
                 }
                 el.classList.add('stimulus-circle', `color-${displayColor}`);
             },
-            instructions: 'Presiona "AZUL" si ves ROJO, "ROJO" si ves AZUL, o "OTRO" para cualquier otro color.'
+            instructions: 'Presiona "AZUL" si ves ROJO, "ROJO" si ves AZUL, o "OTRO" para cualquier otro color.' // Instructions for this stage
         },
         {
-            name: 'Signos',
+            name: 'Signos', // Stage name: Signs
             stimuli: ["/", "( )", ">", "%", "( )", "&", "( )", "/", "( )", "&", "/", "( )", "( )", "%", "/", "&", ">", "/", "%",
                 "/", "( )", "/", ">", "( )", "/", ">", "%", "( )", "&", "( )", "/", ">", "( )", "&", "/", ">", "( )", "( )", "%",
                 "/", "&", ">", "/", "%", "/", "( )", "/", "&", "( )", "/", "( )", "&", "%", "( )", "&", "( )", "/", "&", "( )",
                 "&", "/", "( )", "( )", "%", "/", "&", ">", "/", "%", "/", "( )", "/", "&", "( )", "/", "( )", "&", ">", "/", "%",
-                "/", "( )", "/", "( )", "&", "( )", "/", "( )", "&", "/", "( )", "( )", "%", "/", "&", ">", "/", "%"],
-            getExpectedResponse: (s) => {
+                "/", "( )", "/", "( )", "&", "( )", "/", "( )", "&", "/", "( )", "( )", "%", "/", "&", ">", "/", "%"], // The stimuli for this stage
+            getExpectedResponse: (s) => { // Function to get the expected response
                 if (s === '/') return '>';
-                if (s === '>') return '/';
-                if (s === '( )') return 'x';
-                return 'otro';
+                if (s === '>') return '/'; 
+                if (s === '( )') return 'x'; 
+                return 'otro'; // Otherwise, expect "otro"
             },
-            renderStimulus: (s, el) => {
+            renderStimulus: (s, el) => { // Function to render the stimulus
                 el.textContent = s;
                 el.classList.add('stimulus-sign');
             },
-            instructions: 'Marca ">" cuando aparece "/", "/" cuando aparece ">", "x" cuando aparece "()", y "OTRO" en cualquier otro símbolo.'
+            instructions: 'Marca ">" cuando aparece "/", "/" cuando aparece ">", "x" cuando aparece "()", y "OTRO" en cualquier otro símbolo.' // Instructions for this stage
         }
     ];
 
-    // --- Estado ---
-    let stageIndex = 0;
-    let currentStage = null;
-    let running = false;
-    let responded = false;
-    let trialStartTime = 0;
-    let currentStimulus = '';
-    let data = [];
-    let stageTimer = null;
-    let stageStartTime = 0;
-    let endedByTimeout = false;
+    // --- State ---
+    let stageIndex = 0; // Current stage index
+    let currentStage = null; // Current stage object
+    let running = false; // Is the game running?
+    let responded = false; // Has the user responded in the current trial?
+    let trialStartTime = 0; // Timestamp of the start of the current trial
+    let currentStimulus = ''; // The current stimulus being displayed
+    let data = []; // Array to store trial data
+    let stageTimer = null; // Timer for the stage duration
+    let stageStartTime = 0; // Timestamp of the start of the current stage
+    let endedByTimeout = false; // Did the stage end due to a timeout?
 
-    // métricas
-    let hw_time_1 = 0, hw_time_2 = 0, hw_time_3 = 0;
-    let hw_answer_1 = 0, hw_answer_2 = 0, hw_answer_3 = 0;
-    let hw_score_1 = 0, hw_score_2 = 0, hw_score_3 = 0;
+    // --- Metrics ---
+    let hw_time_1 = 0, hw_time_2 = 0, hw_time_3 = 0; // Time for each stage
+    let hw_answer_1 = 0, hw_answer_2 = 0, hw_answer_3 = 0; // Correct answers for each stage
+    let hw_score_1 = 0, hw_score_2 = 0, hw_score_3 = 0; // Score for each stage
 
-    // elementos DOM
+    // --- DOM elements ---
     const el = {
-        stimulus: container.querySelector('#stimulus'),
-        results: container.querySelector('#results'),
-        startBtn: container.querySelector('#start'),
-        stageIntro: container.querySelector('#stage-intro'),
-        stageTitle: container.querySelector('#stage-title'),
-        stageInstructions: container.querySelector('#stage-instructions'),
-        stageProgress: container.querySelector('#stage-progress'),
-        beginStageBtn: container.querySelector('#begin-stage'),
-        encabezado: container.querySelector('#encabezado'),
-        nextStageBtn: container.querySelector('#next-stage'),
+        stimulus: container.querySelector('#stimulus'), // Stimulus display element
+        results: container.querySelector('#results'), // Results display element
+        startBtn: container.querySelector('#start'), // Start button
+        stageIntro: container.querySelector('#stage-intro'), // Stage introduction screen
+        stageTitle: container.querySelector('#stage-title'), // Stage title element
+        stageInstructions: container.querySelector('#stage-instructions'), // Stage instructions element
+        stageProgress: container.querySelector('#stage-progress'), // Stage progress indicator
+        beginStageBtn: container.querySelector('#begin-stage'), // Button to begin a stage
+        encabezado: container.querySelector('#encabezado'), // Header element
+        nextStageBtn: container.querySelector('#next-stage'), // Button to go to the next stage
     };
 
-    // ==== helpers ====
-    function resetStimulusStyle() {
+    // ==== Helpers ====
+    function resetStimulusStyle() { // Function to reset the stimulus style
         el.stimulus.className = '';
         el.stimulus.textContent = '';
     }
 
-    function showButtonsForStage(stageName) {
+    function showButtonsForStage(stageName) { // Function to show the appropriate buttons for the current stage
         const siNoOtro = container.querySelector('#section-si-no-otro');
         const colores = container.querySelector('#section-colores');
         const signals = container.querySelector('#section-signals');
@@ -114,8 +118,8 @@ export function GoNoGoGame() {
         else if (stageName === 'Signos') show(signals);
     }
 
-    // ==== lógica ====
-    function showStageIntro(stage, index) {
+    // ==== Logic ====
+    function showStageIntro(stage, index) { // Function to show the introduction for a stage
         el.encabezado.classList.add('d-none');
         el.stimulus.style.display = 'none';
         el.results.innerHTML = '';
@@ -130,7 +134,7 @@ export function GoNoGoGame() {
         };
     }
 
-    function runStage(stage) {
+    function runStage(stage) { // Function to run a stage
         currentStage = stage;
         data = [];
         responded = false;
@@ -152,7 +156,7 @@ export function GoNoGoGame() {
         }, STAGE_DURATION_MS);
     }
 
-    function nextTrial(stage) {
+    function nextTrial(stage) { // Function to proceed to the next trial
         if (!running) return;
         resetStimulusStyle();
         responded = false;
@@ -161,7 +165,7 @@ export function GoNoGoGame() {
         trialStartTime = Date.now();
     }
 
-    function recordResponse(response) {
+    function recordResponse(response) { // Function to record the user's response
         if (!running || responded || !currentStage) return;
         responded = true;
         const expected = currentStage.getExpectedResponse(currentStimulus);
@@ -181,7 +185,7 @@ export function GoNoGoGame() {
         nextTrial(currentStage);
     }
 
-    function showResults(stageName) {
+    function showResults(stageName) { // Function to show the results of a stage
         if (stageTimer) clearTimeout(stageTimer);
         el.stimulus.style.display = 'none';
         showButtonsForStage('');
@@ -195,7 +199,7 @@ export function GoNoGoGame() {
         else if (stageIndex === 1) { hw_time_2 = +durationSec.toFixed(3); hw_answer_2 = correct; hw_score_2 = +score.toFixed(3); }
         else if (stageIndex === 2) { hw_time_3 = +durationSec.toFixed(3); hw_answer_3 = correct; hw_score_3 = +score.toFixed(3); }
 
-        // guardar en localStorage
+        // Save partial results to localStorage
         savePartialResult();
 
         stageIndex++;
@@ -206,7 +210,7 @@ export function GoNoGoGame() {
         }
     }
 
-    function savePartialResult() {
+    function savePartialResult() { // Function to save partial results
         const payload = {
             hw_time_1, hw_time_2, hw_time_3,
             hw_answer_1, hw_answer_2, hw_answer_3,
@@ -215,17 +219,16 @@ export function GoNoGoGame() {
         localStorage.setItem("gonogo_progress", JSON.stringify({ stageIndex, payload }));
     }
 
-    
-    function computeAndFinish() {
-    const a1 = hw_answer_1 || 0, a2 = hw_answer_2 || 0, a3 = hw_answer_3 || 0;
-    const s1 = hw_score_1 || 0, s2 = hw_score_2 || 0, s3 = hw_score_3 || 0;
-    let total_homewor = (a1 + a2) !== 0 ? (a1 * a2) / (a1 + a2) : 0;
-    let Interference = a3 - total_homewor;
-    let total_gonogo = ((s1 + s2 + s3) / 3).toFixed(3);
-    let total_gonogo_answer = ((a1 + a2 + a3) / 3).toFixed(3);
-    let climb = 'Bajo';
-    if (total_gonogo > 0.87) climb = 'Alto';
-    else if (total_gonogo > 0.44) climb = 'Medio';
+    function computeAndFinish() { // Function to compute final results and finish the game
+        const a1 = hw_answer_1 || 0, a2 = hw_answer_2 || 0, a3 = hw_answer_3 || 0;
+        const s1 = hw_score_1 || 0, s2 = hw_score_2 || 0, s3 = hw_score_3 || 0;
+        let total_homewor = (a1 + a2) !== 0 ? (a1 * a2) / (a1 + a2) : 0;
+        let Interference = a3 - total_homewor;
+        let total_gonogo = ((s1 + s2 + s3) / 3).toFixed(3);
+        let total_gonogo_answer = ((a1 + a2 + a3) / 3).toFixed(3);
+        let climb = 'Bajo';
+        if (total_gonogo > 0.87) climb = 'Alto';
+        else if (total_gonogo > 0.44) climb = 'Medio';
 
     const finalPayload = {
         hw_time_1, hw_time_2, hw_time_3,
@@ -272,7 +275,7 @@ export function GoNoGoGame() {
 
 
 
-        // === listeners ===
+        // === Listeners ===
         const responseMap = [
             ['#si', 'si'], ['#no', 'no'], ['#otro', 'otro'],
             ['#rojo', 'rojo'], ['#azul', 'azul'], ['#otro-color', 'otro'],
@@ -282,11 +285,11 @@ export function GoNoGoGame() {
             const btn = container.querySelector(sel);
             if (btn) {
                 btn.addEventListener('click', () => {
-                    // feedback visual
+                    // Visual feedback
                     btn.classList.add('pressed');
                     setTimeout(() => btn.classList.remove('pressed'), 150);
 
-                    // registrar respuesta
+                    // Record response
                     recordResponse(resp);
                 });
             }
@@ -294,7 +297,7 @@ export function GoNoGoGame() {
 
     }
 
-    // === listeners ===
+    // === Listeners ===
     const responseMap = [
         ['#si', 'si'], ['#no', 'no'], ['#otro', 'otro'],
         ['#rojo', 'rojo'], ['#azul', 'azul'], ['#otro-color', 'otro'],
@@ -306,8 +309,8 @@ export function GoNoGoGame() {
     });
     el.startBtn.addEventListener('click', () => start());
 
-    function start() {
-        // validar progreso previo
+    function start() { // Function to start the game
+        // Validate previous progress
         const saved = JSON.parse(localStorage.getItem("gonogo_progress") || "null");
         if (saved) {
             stageIndex = saved.stageIndex;
@@ -321,6 +324,7 @@ export function GoNoGoGame() {
         if (stageIndex < STAGES.length) showStageIntro(STAGES[stageIndex], stageIndex);
         else computeAndFinish();
     }
+
 
     return { start };
 

@@ -6,7 +6,9 @@ import { initTMT } from "./resources/tmt.js";
 import { updateTestResults } from "./resources/updateResults.js";
 
 
-// Definimos las rutas del SPA
+// SPA Routes definition
+
+// Each path is mapped to its corresponding HTML view.
 const routes = {
   "/login": "./views/login.html",
   "/tower": "./views/tower.html",
@@ -17,14 +19,15 @@ const routes = {
 };
 
 
+// CSS Handling
 
-// Variable para llevar el CSS activo
+// Keeps track   of the currently loaded CSS file
 let activeCSS = null;
 
-// Función para cargar un CSS dinámicamente
+// Dynamically loads a CSS file
 function loadCSS(href) {
   return new Promise((resolve, reject) => {
-    // Si ya existe este CSS, resolver inmediatamente
+    // If CSS is already loaded, resolve immediately
     if (document.querySelector(`link[href="${href}"]`)) {
       resolve();
       return;
@@ -33,12 +36,12 @@ function loadCSS(href) {
     link.rel = "stylesheet";
     link.href = href;
     link.onload = () => resolve();
-    link.onerror = () => reject(`Error cargando CSS: ${href}`);
+    link.onerror = () => reject(`Error loading CSS: ${href}`);
     document.head.appendChild(link);
   });
 }
 
-// Función para descargar un CSS
+// Removes a CSS file from the document
 function unloadCSS(href) {
   const link = document.querySelector(`link[href="${href}"]`);
   if (link) {
@@ -46,36 +49,38 @@ function unloadCSS(href) {
   }
 }
 
-// Función para navegar entre rutas
+
+// Navigation function
+
+// Handles SPA navigation and route logic
 export async function navigate(pathname) {
   const route = routes[pathname];
   if (!route) {
-    return navigate("/login");
+    return navigate("/login"); 
   }
 
-  // Cargamos el HTML de la ruta
+  // Load the corresponding HTML
   const html = await fetch(route).then(res => res.text());
   document.getElementById("content").innerHTML = html;
 
-  // Actualizamos el URL sin recargar la página
+  // Update the browser URL without reloading the page
   history.pushState({}, "", pathname);
 
-  // Mapeo de rutas a archivos CSS
+  // Map routes to their CSS files
   const cssMap = {
     "/tower": "./resources/tower.css",
     "/stroop": "./resources/stroop.css",
     "/gonogo": "./resources/gonogo.css",
     "/tmt": "./resources/tmt.css"
-    // "/login" no carga CSS adicional
   };
 
-  // Descargar CSS previo si es diferente al actual
+  // Unload previous CSS if different from the new one
   if (activeCSS && activeCSS !== cssMap[pathname]) {
     unloadCSS(activeCSS);
     activeCSS = null;
   }
 
-  // Cargar CSS correspondiente a la ruta si no está cargado
+  // Load the CSS for the current route if necessary
   if (cssMap[pathname] && activeCSS !== cssMap[pathname]) {
     try {
       await loadCSS(cssMap[pathname]);
@@ -85,7 +90,7 @@ export async function navigate(pathname) {
     }
   }
 
-  // Ejecutar la lógica correspondiente a la ruta
+  // Execute the corresponding JS logic for the route
   if (pathname === "/login") {
     login();
   } else if (pathname === "/tower") {
@@ -101,7 +106,11 @@ export async function navigate(pathname) {
   }
 }
 
-// Manejamos los clicks en enlaces con el atributo [data-link] para navegación SPA
+
+// SPA Event Listeners
+
+
+// Intercept clicks on links with [data-link] to enable SPA navigation
 document.body.addEventListener("click", (e) => {
   if (e.target.matches("[data-link]")) {
     e.preventDefault();
@@ -110,24 +119,30 @@ document.body.addEventListener("click", (e) => {
   }
 });
 
-// Detectamos el botón "atrás" y navegamos sin recargar
+// Handle browser back/forward navigation without reloading
 window.addEventListener("popstate", () => {
   navigate(location.pathname);
 });
 
-// Al cargar la página, verificamos si hay un usuario en localStorage y navegamos
+
+// Initial Load
+
+// When the page loads, check if a user is stored in localStorage
+// and navigate to the appropriate view (login or test).
 window.addEventListener("DOMContentLoaded", () => {
   const currentUser = localStorage.getItem("user");
   const currentPath = location.pathname;
 
   if (currentUser) {
-    console.log("usuario vista ")
+    console.log("User session detected");
+    // If path is invalid or root, redirect to Stroop test
     if (currentPath === "/" || !routes[currentPath]) {
       navigate("/stroop");
     } else {
       navigate(currentPath);
     }
   } else {
+    // If not logged in, force navigation to login for restricted routes
     if (!routes[currentPath] || currentPath === "/" || currentPath === "/tower" || currentPath === "/stroop" || currentPath === "/gonogo" || currentPath === "/tmt" || currentPath === "/logout") {
       navigate("/login");
     } else {
@@ -135,18 +150,3 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
-
-
-//Cerrar sesion
-
-// document.addEventListener("click", (e) => {
-//   if (e.target && e.target.id === "logout") {
-//     logout();
-//   }
-// });
-
-// function logout() {
-//   localStorage.removeItem("user"); // Elimina la sesión
-//   window.location.href = "./index.html";              // Redirige al login
-// }
-
