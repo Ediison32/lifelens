@@ -255,42 +255,77 @@ export function initStroop() {
         }
     }
 
-    function showResult() {
+   function showResult() {
+    // ocultar pantalla de test y preparar resultDiv (como antes)
+    testDiv.classList.add('hidden');
+    resultDiv.classList.remove('hidden');
 
-        testDiv.classList.add('hidden');
-        resultDiv.classList.remove('hidden');
+    // Asigna los resultados finales a las variables por si acaso
+    p = scoresPorTarea[0] || 0;
+    c = scoresPorTarea[1] || 0;
+    pc = scoresPorTarea[2] || 0;
 
-        // Asigna los resultados finales a las variables por si acaso
-        p = scoresPorTarea[0];
-        c = scoresPorTarea[1];
-        pc = scoresPorTarea[2];
-        
-        //Calcula P_C solo si P + C no es 0 para evitar división por cero
-        if ((p + c) !== 0) {
-           P_C = (p * c) / (p + c);
-        } else {
-            P_C = 0;
-        }
+    // Calcula P_C (PC*) solo si P + C no es 0 para evitar división por cero
+    P_C = (p + c) !== 0 ? (p * c) / (p + c) : 0;
 
-        // calcular la interferencia
-        Interference = pc - P_C;
-        
-        //Calcula total_stroop solo si time no es 0 para evitar división por cero
-        if (time !== 0) {
-            total_stroop = (p + c + pc) / time;
-        } else {
-            total_stroop = 0;
-        }
+    // calcular la interferencia
+    Interference = pc - P_C;
 
-        // Clasificación usando climb
-        climb = climbs(total_stroop);
+    // Calcula total_stroop solo si time no es 0 para evitar división por cero
+    total_stroop = time ? (p + c + pc) / time : 0;
 
-        //fin del test
-        let detalle = `
-    <h2>Test completado</h2>
-    <button id="stroop-next-test-btn">
-    <a href="/gonogo" id="stroop-next-test-link">Siguiente test</a>
-    </button>
+    // Clasificación usando climb
+    climb = climbs(total_stroop);
+
+    // Guardar tiempos por tarea (ya lo haces en saveTaskResult, pero por seguridad)
+    time_homework_p = time_homework_p || 45 - timeLeft; // si no están, se dejan los valores actuales
+    time_homework_c = time_homework_c || 45 - timeLeft;
+    time_homework_pc = time_homework_pc || 45 - timeLeft;
+
+    // --- Armamos el payload exactamente con las columnas de tu tabla `stroop` ---
+    const finalPayload = {
+        p: Number(p || 0),
+        c: Number(c || 0),
+        pc: Number(pc || 0),
+        P_C: Number(Number(P_C || 0).toFixed(6)),
+        Interference: Number(Number(Interference || 0).toFixed(6)),
+        time: Number(time || 0),
+        time_homework_p: Number(time_homework_p || 0),
+        time_homework_c: Number(time_homework_c || 0),
+        time_homework_pc: Number(time_homework_pc || 0),
+        total_stroop: Number(Number(total_stroop || 0).toFixed(6)),
+        climb: String(climb || "")
+    };
+
+    // Guardar localmente (invisible para usuario)
+    localStorage.setItem('stroop_final', JSON.stringify(finalPayload));
+
+    // Opcional: enviar al backend (ajusta la URL a tu endpoint real)
+    // Si no quieres enviar automáticamente, comenta el bloque fetch.
+    fetch('/api/stroop', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(finalPayload)
+    })
+    .then(resp => {
+        if (!resp.ok) throw new Error('Error en respuesta del servidor: ' + resp.status);
+        return resp.json();
+    })
+    .then(data => {
+        console.log('Stroop guardado en servidor:', data);
+        // puedes procesar respuesta del servidor si necesitas (ej: id_stroop)
+    })
+    .catch(err => {
+        console.error('No se pudo enviar Stroop al servidor:', err);
+        // no bloquear al usuario; seguimos el flujo igualmente
+    });
+
+    // Rendimiento: no mostramos los datos al usuario (invisible), pero dejamos el botón siguiente
+    resultDiv.innerHTML = `
+        <h2>Test completado</h2>
+        <button id="stroop-next-test-btn">
+            <a href="/gonogo" id="stroop-next-test-link">Siguiente test</a>
+        </button>
     `;
         resultDiv.innerHTML = detalle;
 
