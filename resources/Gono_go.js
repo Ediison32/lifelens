@@ -215,36 +215,61 @@ export function GoNoGoGame() {
         localStorage.setItem("gonogo_progress", JSON.stringify({ stageIndex, payload }));
     }
 
+    
     function computeAndFinish() {
-        const a1 = hw_answer_1 || 0, a2 = hw_answer_2 || 0, a3 = hw_answer_3 || 0;
-        const s1 = hw_score_1 || 0, s2 = hw_score_2 || 0, s3 = hw_score_3 || 0;
-        let total_homewor = (a1 + a2) !== 0 ? (a1 * a2) / (a1 + a2) : 0;
-        let Interference = a3 - total_homewor;
-        let total_gonogo = ((s1 + s2 + s3) / 3).toFixed(3);
-        let total_gonogo_answer = ((a1 + a2 + a3) / 3).toFixed(3);
-        let climb = 'Bajo';
-        if (total_gonogo > 0.87) climb = 'Alto';
-        else if (total_gonogo > 0.44) climb = 'Medio';
+    const a1 = hw_answer_1 || 0, a2 = hw_answer_2 || 0, a3 = hw_answer_3 || 0;
+    const s1 = hw_score_1 || 0, s2 = hw_score_2 || 0, s3 = hw_score_3 || 0;
+    let total_homewor = (a1 + a2) !== 0 ? (a1 * a2) / (a1 + a2) : 0;
+    let Interference = a3 - total_homewor;
+    let total_gonogo = ((s1 + s2 + s3) / 3).toFixed(3);
+    let total_gonogo_answer = ((a1 + a2 + a3) / 3).toFixed(3);
+    let climb = 'Bajo';
+    if (total_gonogo > 0.87) climb = 'Alto';
+    else if (total_gonogo > 0.44) climb = 'Medio';
 
-        const finalPayload = {
-            hw_time_1, hw_time_2, hw_time_3,
-            hw_answer_1, hw_answer_2, hw_answer_3,
-            hw_score_1, hw_score_2, hw_score_3,
-            total_homewor: +total_homewor.toFixed(3),
-            Interference: +Interference.toFixed(3),
-            total_gonogo: +total_gonogo,
-            total_gonogo_answer: +total_gonogo_answer,
-            climb
-        };
+    const finalPayload = {
+        hw_time_1, hw_time_2, hw_time_3,
+        hw_answer_1, hw_answer_2, hw_answer_3,
+        hw_score_1, hw_score_2, hw_score_3,
+        total_homewor: +total_homewor.toFixed(3),
+        Interference: +Interference.toFixed(3),
+        total_gonogo: +total_gonogo,
+        total_gonogo_answer: +total_gonogo_answer,
+        climb
+    };
 
-        localStorage.setItem("gonogo_final", JSON.stringify(finalPayload));
+    // === Cálculos extra (PC*, Interference formal) ===
+    const PC = hw_score_3 || 0;
+    const C = hw_score_2 || 0;
+    const PC_star = (PC + C) !== 0 ? (PC / (PC + C)) : 0;
+    const InterferenceCalc = PC - PC_star;
 
-        el.results.innerHTML = '<b>¡Juego finalizado!</b>';
-        el.nextStageBtn.textContent = "Siguiente test";
-        el.nextStageBtn.classList.remove('d-none');
-        el.nextStageBtn.onclick = () => {
-            window.location.href = "/tower";
-        };
+    finalPayload.PC = +PC.toFixed(3);
+    finalPayload.C = +C.toFixed(3);
+    finalPayload["PC*"] = +PC_star.toFixed(3);
+    finalPayload.Interference = +InterferenceCalc.toFixed(3);
+
+    // Guardar en localStorage
+    localStorage.setItem("gonogo_final", JSON.stringify(finalPayload));
+
+    // 🔹 Enviar a la base de datos (opcional)
+    fetch("/api/gonogo_results", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(finalPayload)
+    })
+    .then(res => res.json())
+    .then(data => console.log("Resultados Go/No-Go guardados:", data))
+    .catch(err => console.error("Error al guardar resultados:", err));
+
+    el.results.innerHTML = '<b>¡Juego finalizado!</b>';
+    el.nextStageBtn.textContent = "Siguiente test";
+    el.nextStageBtn.classList.remove('d-none');
+    el.nextStageBtn.onclick = () => {
+        window.location.href = "/tower";
+    };
+}
+
 
 
         // === listeners ===
@@ -298,4 +323,4 @@ export function GoNoGoGame() {
     }
 
     return { start };
-}
+

@@ -93,21 +93,36 @@ function dragEnd(e) {
     if (finalTower.childNodes.length === number_pieces) {
         clearInterval(timerInterval);
 
-        // Generate final summary
+        //  Generar los datos finales del juego
         const gameData = exportGameData();
         localStorage.setItem("towerGameData", JSON.stringify(gameData));
 
+        //  Enviar resultados a la base de datos
+        fetch("/api/t_hanoi", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(gameData)
+        })
+        .then(res => res.json())
+        .then(data => console.log(" Resultados Hanoi guardados:", data))
+        .catch(err => console.error(" Error al guardar resultados:", err));
+
+        //  Mostrar (o mantener oculto) el resumen final
         let summary = `
-            ✅ Juego completado <br>
-            Movimientos: ${gameData.moves} <br>
-            Tiempo usado: ${gameData.time}s <br>
-            <br>
-            Torres finales: <br>
-            A: [${getDisksInTower("a").join(", ")}] <br>
-            B: [${getDisksInTower("b").join(", ")}] <br>
-            C: [${getDisksInTower("c").join(", ")}]
+            <b>Juego completado</b> <br><br>
+            <b>Número de piezas:</b> ${gameData.number_pieces} <br>
+            <b>Piezas en otro lateral:</b> ${gameData.number_pieces_r_side} <br>
+            <b>Tiempo:</b> ${gameData.time}s <br>
+            <b>Calif. Tiempo:</b> ${gameData.motion_rating2} <br>
+            <b>Calif. Movimiento:</b> ${gameData.motion_rating} <br>
+            <b>Total Hanoi:</b> ${gameData.total_hanoi}
         `;
 
+        const resultContainer = document.getElementById("resultData") || document.getElementById("result");
+        resultContainer.innerHTML = summary;
+        resultContainer.hidden = true; // Oculto al usuario
+
+        //  Mostrar vista de resultado final
         showResult();
     }
 }
@@ -225,15 +240,35 @@ function exportGameData() {
 // End game
 // ==============================
 function goToGameOver() {
+    clearInterval(timerInterval);
     const gameData = exportGameData();
     localStorage.setItem("towerGameData", JSON.stringify(gameData));
 
+    //  Enviar resultados aunque no haya terminado
+    fetch("/api/t_hanoi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(gameData)
+    })
+    .then(res => res.json())
+    .then(data => console.log(" Resultados guardados al agotarse el tiempo:", data))
+    .catch(err => console.error(" Error al guardar resultados:", err));
+
     let summary = `
-        ⏳ Tiempo agotado <br>
-        Movimientos: ${gameData.moves} <br>
-        <br>
+         <b>Tiempo agotado</b> <br><br>
+        <b>Número de piezas:</b> ${gameData.number_pieces} <br>
+        <b>Piezas en otro lateral:</b> ${gameData.number_pieces_r_side} <br>
+        <b>Tiempo:</b> ${gameData.time}s <br>
+        <b>Calif. Tiempo:</b> ${gameData.motion_rating2} <br>
+        <b>Calif. Movimiento:</b> ${gameData.motion_rating} <br>
+        <b>Total Hanoi:</b> ${gameData.total_hanoi}
     `;
 
-    showResult(summary);
+    const resultContainer = document.getElementById("resultData") || document.getElementById("result");
+    resultContainer.innerHTML = summary;
+    resultContainer.hidden = true; // También oculto para el usuario
+
+    showResult();
 }
+
 
