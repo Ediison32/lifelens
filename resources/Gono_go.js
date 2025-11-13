@@ -1,10 +1,8 @@
-// Export the main function for the Go/No-Go game
 export function GoNoGoGame() {
     // Get the container element for the game
     const container = document.getElementById('GoNoGo-section');
     // Set the duration for each stage in milliseconds
     const STAGE_DURATION_MS = 45000;
-    // Set the maximum number of responses per stage
     const MAX_RESPONSE = 100;
     const STAGES = [
         {
@@ -40,7 +38,7 @@ export function GoNoGoGame() {
                 el.textContent = '';
                 let displayColor = c;
                 if (c === 'otro') {
-                    displayColor = Math.random() < 0.5 ? 'amarillo' : 'verde'; // If stimulus is "otro", display yellow or green
+                    displayColor = Math.random() < 0.5 ? 'amarillo' : 'verde'; 
                 }
                 el.classList.add('stimulus-circle', `color-${displayColor}`);
             },
@@ -52,7 +50,7 @@ export function GoNoGoGame() {
                 "/", "( )", "/", ">", "( )", "/", ">", "%", "( )", "&", "( )", "/", ">", "( )", "&", "/", ">", "( )", "( )", "%",
                 "/", "&", ">", "/", "%", "/", "( )", "/", "&", "( )", "/", "( )", "&", "%", "( )", "&", "( )", "/", "&", "( )",
                 "&", "/", "( )", "( )", "%", "/", "&", ">", "/", "%", "/", "( )", "/", "&", "( )", "/", "( )", "&", ">", "/", "%",
-                "/", "( )", "/", "( )", "&", "( )", "/", "( )", "&", "/", "( )", "( )", "%", "/", "&", ">", "/", "%"], // The stimuli for this stage
+                "/", "( )", "/", "( )", "&", "( )", "/", "( )", "&", "/", "( )", "( )", "%", "/", "&", ">", "/", "%"], 
             getExpectedResponse: (s) => { // Function to get the expected response
                 if (s === '/') return '>';
                 if (s === '>') return '/'; 
@@ -68,16 +66,16 @@ export function GoNoGoGame() {
     ];
 
     // --- State ---
-    let stageIndex = 0; // Current stage index
-    let currentStage = null; // Current stage object
-    let running = false; // Is the game running?
-    let responded = false; // Has the user responded in the current trial?
-    let trialStartTime = 0; // Timestamp of the start of the current trial
-    let currentStimulus = ''; // The current stimulus being displayed
-    let data = []; // Array to store trial data
-    let stageTimer = null; // Timer for the stage duration
-    let stageStartTime = 0; // Timestamp of the start of the current stage
-    let endedByTimeout = false; // Did the stage end due to a timeout?
+    let stageIndex = 0; 
+    let currentStage = null; 
+    let running = false; 
+    let responded = false; 
+    let trialStartTime = 0;
+    let currentStimulus = ''; 
+    let data = []; 
+    let stageTimer = null; 
+    let stageStartTime = 0;
+    let endedByTimeout = false; 
 
     // --- Metrics ---
     let hw_time_1 = 0, hw_time_2 = 0, hw_time_3 = 0; // Time for each stage
@@ -86,16 +84,16 @@ export function GoNoGoGame() {
 
     // --- DOM elements ---
     const el = {
-        stimulus: container.querySelector('#stimulus'), // Stimulus display element
-        results: container.querySelector('#results'), // Results display element
-        startBtn: container.querySelector('#start'), // Start button
-        stageIntro: container.querySelector('#stage-intro'), // Stage introduction screen
-        stageTitle: container.querySelector('#stage-title'), // Stage title element
-        stageInstructions: container.querySelector('#stage-instructions'), // Stage instructions element
-        stageProgress: container.querySelector('#stage-progress'), // Stage progress indicator
-        beginStageBtn: container.querySelector('#begin-stage'), // Button to begin a stage
-        encabezado: container.querySelector('#encabezado'), // Header element
-        nextStageBtn: container.querySelector('#next-stage'), // Button to go to the next stage
+        stimulus: container.querySelector('#stimulus'), 
+        results: container.querySelector('#results'), 
+        startBtn: container.querySelector('#start'), 
+        stageIntro: container.querySelector('#stage-intro'), 
+        stageTitle: container.querySelector('#stage-title'), 
+        stageInstructions: container.querySelector('#stage-instructions'), 
+        stageProgress: container.querySelector('#stage-progress'), 
+        beginStageBtn: container.querySelector('#begin-stage'), 
+        encabezado: container.querySelector('#encabezado'), 
+        nextStageBtn: container.querySelector('#next-stage'), 
     };
 
     // ==== Helpers ====

@@ -398,11 +398,11 @@ export function initTMT() {
         } else { // Fin de la Parte B
             const partBResult = testResult;
             console.log("Resultado Parte B (listo para enviar):", partBResult);
-
+> 
             // --- CÁLCULOS DE RESULTADOS ---
             const correct_answers_A = partAResult.hits;
             const time_A = partAResult.timeInSeconds;
-            const score_A = time_A > 0 ? (correct_answers_A / time_A) : 0;
+            const score_A = time_A 0 ? (correct_answers_A / time_A) : 0;
 
             const correct_answers_B = partBResult.hits;
             const time_B = partBResult.timeInSeconds;
