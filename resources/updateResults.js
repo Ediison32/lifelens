@@ -46,7 +46,7 @@ export async function updateTestResults() {
                         hw_time_3: gonogo.hw_time_3,
                         hw_answer_3: gonogo.hw_answer_3,
                         hw_score_3: gonogo.hw_score_3,
-                        total_homewor: gonogo.total_homework, // cuidado: la API lo pide así
+                        total_homewor: gonogo.total_homewor, // cuidado: la API lo pide así
                         Interference: gonogo.Interference,    // mayúscula
                         total_gonogo_answer: gonogo.total_gonogo_answer,
                         total_gonogo: gonogo.total_gonogo,
