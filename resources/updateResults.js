@@ -46,8 +46,8 @@ export async function updateTestResults() {
                         hw_time_3: gonogo.hw_time_3,
                         hw_answer_3: gonogo.hw_answer_3,
                         hw_score_3: gonogo.hw_score_3,
-                        total_homewor: gonogo.total_homework, // cuidado: la API lo pide así
-                        Interference: gonogo.interference,    // mayúscula
+                        total_homewor: gonogo.total_homewor, // cuidado: la API lo pide así
+                        Interference: gonogo.Interference,    // mayúscula
                         total_gonogo_answer: gonogo.total_gonogo_answer,
                         total_gonogo: gonogo.total_gonogo,
                         climb: gonogo.climb
@@ -66,7 +66,7 @@ export async function updateTestResults() {
                         c: stroop.c,
                         pc: stroop.pc,
                         P_C: stroop.P_C,
-                        Interference: stroop.interference, // corregido
+                        Interference: stroop.Interference, // corregido
                         time: stroop.time,
                         time_homework_p: stroop.time_homework_p,
                         time_homework_c: stroop.time_homework_c,
@@ -84,10 +84,10 @@ export async function updateTestResults() {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        number_pieces: hanoi.totalDisks,
-                        number_pieces_r_side: hanoi.disksInC,
+                        number_pieces: hanoi.number_pieces,
+                        number_pieces_r_side: hanoi.number_pieces_r_side,
                         motion_rating: hanoi.motion_rating,
-                        time: hanoi.timeUsed,
+                        time: hanoi.time,
                         motion_rating2: hanoi.motion_rating2,
                         total_hanoi: hanoi.total_hanoi
                     })
