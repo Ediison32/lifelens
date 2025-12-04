@@ -76,7 +76,7 @@ export async function cargarAnalitica() {
     getFromTable('result', user.id_result)
   ]);
 
-  console.log("user", users);
+  
   console.log("gonogo", gonogo);
   console.log("t_hanoi", t_hanoi);
   console.log("trail_making", trail_making);
