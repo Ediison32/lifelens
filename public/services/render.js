@@ -55,7 +55,7 @@ export async function cargarAnalitica() {
   }
 
   // Traer el usuario
-  const user = await getFromTable('user', id_user);
+  const user = await getFromTable('users', id_user);
   if (!user) {
     alert("Usuario no encontrado.");
     return;
@@ -76,7 +76,7 @@ export async function cargarAnalitica() {
     getFromTable('result', user.id_result)
   ]);
 
-  console.log("user", user);
+  console.log("user", users);
   console.log("gonogo", gonogo);
   console.log("t_hanoi", t_hanoi);
   console.log("trail_making", trail_making);
