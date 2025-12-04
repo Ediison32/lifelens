@@ -4,7 +4,7 @@ const API_URL = "https://lifelens-db.vercel.app";
 export async function getFromTable(table = "", id = null) {
   try {
     if (!table) {
-      table = 'user';
+      table = 'users';
     }
     let url = `${API_URL}/${table}`;
     if (id !== null && id !== undefined) {
@@ -26,7 +26,7 @@ export async function getFromTable(table = "", id = null) {
 export async function deleteUser(id){
   try {
 
-    let url = `${API_URL}/user`;
+    let url = `${API_URL}/users`;
     if (id !== null && id !== undefined) {
       url += `/${id}`;
     }
@@ -48,7 +48,7 @@ export async function deleteUser(id){
 // ---------- Llamada POST para crear usuario ----------
 export async function createUser(payload) {
   try {
-    let url = `${API_URL}/user`;
+    let url = `${API_URL}/users`;
     const res = await fetch(url, {
       method : 'POST',
       headers: { 'Content-Type': 'application/json' },
