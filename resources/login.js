@@ -10,7 +10,7 @@ export async function login() {
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const username = document.getElementById('user').value.trim(); // El documento (username)
+    const username = document.getElementById('users').value.trim(); // El documento (username)
 
 
     const API_URL = 'https://lifelens-db.vercel.app/document';
