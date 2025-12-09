@@ -1,6 +1,8 @@
 import { navigate } from "../index.js";
 
 // Función para manejar el login
+
+
 export async function login() {
   const message = document.getElementById('message');
   const loginForm = document.getElementById('login-form-id');
@@ -9,6 +11,8 @@ export async function login() {
     e.preventDefault();
 
     const username = document.getElementById('users').value.trim(); // El documento (username)
+
+    
     const API_URL = 'https://lifelens-db.vercel.app/document';
 
     if (!username) {
